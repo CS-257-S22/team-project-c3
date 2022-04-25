@@ -2,6 +2,4 @@
 Team members: 
 * Morgan
 * Alice 
-* Kana 
-* Isabella 
 
