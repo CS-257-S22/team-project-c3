@@ -12,7 +12,8 @@ app = Flask(__name__)
 what2EatObject = what2Eat.ProductData("SmallProductSheet.csv")
 
 def get_all_products(brandName):
-    return f"Here is the list of products for the brand {brandName} <br>{what2EatObject.getAllProducts(brandName)}"
+    listOfBrands = what2EatObject.getAllProducts(brandName)
+    return f"Here is the list of products for the brand {brandName} <br>{listOfBrands}"
 
 @app.route('/')
 def homepage():
