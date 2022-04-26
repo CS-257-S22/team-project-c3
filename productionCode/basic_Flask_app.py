@@ -1,7 +1,7 @@
 '''This is a program to run a basic app using Flask. It uses the funtions
 written by the authors of What2Eat. It intends to demonstrate a simple
 route based on the What2Eat code
-Written by Morgan Graves, April 21, 2022'''
+'''
 
 from flask import Flask
 import csv

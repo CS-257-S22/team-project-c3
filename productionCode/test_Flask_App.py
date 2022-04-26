@@ -1,10 +1,10 @@
 '''This is a test suite for the what2Eat flask app. It is split
 into two classes: integration and unit.
-Written by Morgan Graves, April 24, 2022'''
+'''
 
 import unittest
 from unittest import mock, TestCase
-from Morgans_basic_app import *
+from basic_Flask_app import *
 
 
 
