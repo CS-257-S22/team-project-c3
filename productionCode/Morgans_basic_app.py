@@ -9,11 +9,19 @@ import what2Eat
 
 app = Flask(__name__)
 
-what2EatObject = what2Eat.ProductData("SmallProductSheet.csv")
+try: 
+    what2EatObject = what2Eat.ProductData("SmallProductSheet.csv")
+except:
+    print("The dataset file was not found")
 
 def get_all_products(brandName):
-    listOfBrands = what2EatObject.getAllProducts(brandName)
-    return f"Here is the list of products for the brand {brandName} <br>{listOfBrands}"
+    listOfProducts = what2EatObject.getAllProducts(brandName)
+    return f"Here is the list of products for the brand {brandName} <br>{listOfProducts}"
+
+def brand_Not_Found_Error(brandName):
+    allOfTheBrands = what2EatObject.returnBrands()
+    return f"The brand {brandName} is not in the database.<br><br>" \
+        f"The list of brands in the database are:<br>{allOfTheBrands}."
 
 @app.route('/')
 def homepage():
@@ -27,7 +35,10 @@ def homepage():
 @app.route('/Products/<brandName>')
 def request_for_products(brandName):
     '''Prints to the screen all of the products of the given brand'''
-    return get_all_products(brandName)
+    if what2EatObject.isValidBrand(brandName):
+        return get_all_products(brandName)
+    return brand_Not_Found_Error(brandName)
+    
 
 @app.errorhandler(404)
 def page_not_found(e):

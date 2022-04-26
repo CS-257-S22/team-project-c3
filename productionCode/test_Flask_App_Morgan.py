@@ -4,7 +4,7 @@ Written by Morgan Graves, April 24, 2022'''
 
 import unittest
 from unittest import mock, TestCase
-from Flask_app.Morgans_basic_app import *
+from Morgans_basic_app import *
 
 
 
@@ -32,9 +32,12 @@ class TestFlaskAppIntegration(unittest.TestCase):
     def test_route_to_get_All_Products(self):
         with mock.patch('what2Eat.ProductData.getAllProducts') as fake_data:
             fake_data.return_value = "abcdefg"
-            response = self.app.get('/Products/Target', follow_redirects = True)
-        outputString = "Here is the list of products for the brand Target <br>abcdefg"
+            response = self.app.get('/Products/FRESH & EASY', follow_redirects = True)
+        outputString = "Here is the list of products for the brand FRESH & EASY <br>abcdefg"
         self.assertEqual(outputString, response.data.decode('utf-8'))
+
+    def test_get_All_Products_Brand_Not_in_Datat(self):
+        pass
 
 
 class TestFlaskAppUnit(unittest.TestCase):
@@ -48,6 +51,14 @@ class TestFlaskAppUnit(unittest.TestCase):
             listOfBrandsStatement = get_all_products("Target")
         outputString = f"Here is the list of products for the brand Target <br>abcdefg"
         self.assertEqual(outputString, listOfBrandsStatement)
+
+    def test_brand_Not_Found_Error(self):
+        with mock.patch('what2Eat.ProductData.returnBrands') as fake_data:
+            fake_data.return_value = ['BrandA', 'BrandB', 'BrandC', 'BrandD']
+            resultingString = brand_Not_Found_Error('BrandE')
+        expectedString = f"The brand BrandE is not in the database.<br><br>" \
+            f"The list of brands in the database are:<br>['BrandA', 'BrandB', 'BrandC', 'BrandD']."
+        self.assertEqual(expectedString, resultingString)
 
 if __name__ == '__main__':
     unittest.main()
