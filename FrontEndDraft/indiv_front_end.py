@@ -37,6 +37,13 @@ def display_row_by_title():
 
         return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
 
+@app.route('/aboutPage')
+def display_about_page():
+    return render_template('about.html')
+@app.errorhandler(404)
+def page_not_found(e):
+     return render_template('404.html')
+
 load_data()
 app.run(host='0.0.0.0', port=81)
 
