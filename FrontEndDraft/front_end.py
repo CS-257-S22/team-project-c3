@@ -40,6 +40,7 @@ def display_row_by_title():
 @app.route('/aboutPage')
 def display_about_page():
     return render_template('about.html', rows=getRowTitles())
+
 @app.errorhandler(404)
 def page_not_found(e):
      return render_template('404.html', rows=getRowTitles())
