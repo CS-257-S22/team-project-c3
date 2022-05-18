@@ -86,7 +86,7 @@ class ProductData:
         productData = self.load_csv_file() #product data continaing name, brand, and ingredients 
         for row in productData:
             if row[0] == productName and row[1] == brandName:
-                return row[2].lower() #convert to lower case 
+                return row[2].lower()  
         
     def containsIngredient(self, ingredient, brandName, productName):
         """
