@@ -1,4 +1,3 @@
-# from colorama import Cursor
 import psycopg2
 import psqlConfig as config
 
