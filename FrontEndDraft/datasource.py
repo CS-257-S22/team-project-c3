@@ -23,8 +23,19 @@ class DataSource:
         query = "SELECT productName FROM products WHERE brandName=%s"
 
         cursor.execute(query, (brand,))
+        
+        print(cursor.fetchall())
+
+    def getAllProducts(self):
+
+        cursor = self.theConnection.cursor()
+
+        query = "SELECT productName FROM products"
+
+        cursor.execute(query,)
 
         print(cursor.fetchall())
+
 
 if __name__ == '__main__':
     my_source = DataSource()
