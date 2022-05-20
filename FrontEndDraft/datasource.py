@@ -15,37 +15,21 @@ class DataSource:
             exit()
         return connection
 
-    def stripCommas(self, rawDataTuples):
+    def stripOutJunk(self, rawDataTuples):
         '''Strip out the leading and trailing parantheses and apostrophes
         WORK IN PROGRESS'''
-        # rawDataString = ''.join([str(item) for item in rawDataList])
-        # print(rawDataString)
-        # rawDataList = list(rawDataTuples)
-        # rawDataString = rawDataString.replace("(", "")
-        # rawDataString = rawDataString.replace("'", "")
-        # rawDataString = rawDataString.replace(")", "")
-        # print(rawDataString)
-        # for aTuple in rawDataTuples:
 
-        # print(rawDataTuples)
-        # for component in rawDataList:
-        #     component = component.strip(",")
-        
-        # strippedDataList = rawDataString.strip(",")
-      #  strippedDataList = []
-       # for item in rawDataTuples:
-        #    strippedDataList.append(str(item))
+        strippedDataList = []
+        for item in rawDataTuples:
+            productString = str(item[0])
+            strippedDataList.append(productString)
 
-        #for item in strippedDataList:
-         #   item = item.replace("(", '')
-          #  item = item.replace("'", '')
-           # item = item.replace(")", '')
-            # appenedItem = item[2: item.length()]
-       # return strippedDataList
+        return(strippedDataList)
+
 
     def stripProducts(self, products):
         '''Strip the prodcuts of leading parantheses and apostrophes'''
-        return self.stripCommas(products)
+        return self.stripOutJunk(products)
 
     def getProducts(self, brand):
         '''Gather the products associated with the given brandName'''
@@ -54,8 +38,8 @@ class DataSource:
         query = "SELECT productName FROM products WHERE brandName=%s"
         cursor.execute(query, (brand,))
         brandProducts = (cursor.fetchall())
-        return brandProducts
-      #  return self.stripProducts(brandProducts)
+        # return brandProducts
+        return self.stripProducts(brandProducts)
 
     def getAllProducts(self):
         '''Gather every product name included in the dataset'''
@@ -64,8 +48,8 @@ class DataSource:
         query = "SELECT productName FROM products"
         cursor.execute(query,)
         allProducts = (cursor.fetchall())
-        return allProducts
-        #return self.stripProducts(allProducts)
+        # return allProducts
+        return self.stripProducts(allProducts)
     
     def getIngredients(self, theProduct):
         '''Gathers the list of ingredients from the given product'''
@@ -84,5 +68,5 @@ class DataSource:
 if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
-    print(my_source.getProducts("Holiday Candy Corp, Inc."))
-    print(my_source.getIngredients("JELLY WREATHS"))
+    (my_source.getProducts("Holiday Candy Corp, Inc."))
+    # (my_source.getIngredients("JELLY WREATHS"))
