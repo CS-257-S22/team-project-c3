@@ -9,7 +9,7 @@ databaseQuery = DataSource() #initializes new object of datasource
 
 @app.route('/')
 def homepage():
-    return render_template('index.html', rows=get_all_products())
+    return render_template('home.html', rows=get_all_products())
 
 '''We are temporarily keeping this commented out code for reference'''
 # def load_data():
