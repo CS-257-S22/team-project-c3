@@ -1,3 +1,8 @@
+'''Handles all of the data quesries to the SQL database and
+provides the apporiatlly formated data to the flask app.
+Written by Alice Cutter and Morgan Graves
+April-May 2022'''
+
 import psycopg2
 import psqlConfig as config
 
