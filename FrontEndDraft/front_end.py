@@ -1,3 +1,8 @@
+# Flask app code for the what2Eat website
+# Written by Morgan Graves and Alice Cutter
+# April-May 2022
+
+
 from flask import Flask, render_template, request
 import csv
 from datasource import *
