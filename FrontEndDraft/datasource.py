@@ -17,7 +17,7 @@ class DataSource:
 
     def stripOutJunk(self, rawDataTuples):
         '''Strip out the leading and trailing parantheses and apostrophes
-        WORK IN PROGRESS'''
+        '''
 
         strippedDataList = []
         for item in rawDataTuples:
