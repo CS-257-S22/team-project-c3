@@ -30,20 +30,20 @@ def homepage():
 
 #     return row_titles
 
-# def getRowByTitle(title):
-#      for row in data:
-#          if row[0] == title:
-#              return row
-#      return []
+def getRowByTitle(title):
+    for row in data:
+        if row[0] == title:
+            return row
+    return []
 
-# @app.route('/rowbytitle')
-# def display_row_by_title():
-#         value = getRowByTitle(request.args['rowchoice'])
-#         product = value[0]
-#         brand = value[1]
-#         ingredients = value[2].split(',')
+@app.route('/rowbytitle', methods=['POST'])
+def display_row_by_title():
+    value = getRowByTitle(request.form['rowchoice'])
+    product = value[0]
+    brand = value[1]
+    ingredients = value[2].split(',')
 
-#         return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
+    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
 
 def get_ingredients_from_database(theProduct):
     '''Helper function to retrieve ingredients from database'''
@@ -60,11 +60,11 @@ def get_all_products():
     allProducts = databaseQuery.getAllProducts()
     return allProducts
 
-@app.route('/productInfo')
+@app.route('/productInfo', methods=['POST'])
 def display_product_info_list():
     '''renders the product info page given the product information'''
-    ingredients = get_ingredients_from_database(request.args['product']) #need to figure out how you pass the product name that was selected in the autofill bar
-    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients) #how do you also include the brandname info so the template can display it
+    ingredients = get_ingredients_from_database(request.form['product']) #need to figure out how you pass the product name that was selected in the autofill bar
+    return render_template('productInfo.html', product="TO DO", brand="brand", ingredients=ingredients) #how do you also include the brandname info so the template can display it
     #if we want autofill bar available on this page, do we need to also pass rows=get_all_products?
 
 @app.route('/aboutPage')
