@@ -1,3 +1,8 @@
+'''Handles all of the data quesries to the SQL database and
+provides the apporiatlly formated data to the flask app.
+Written by Alice Cutter and Morgan Graves
+April-May 2022'''
+
 import psycopg2
 import psqlConfig as config
 
@@ -69,4 +74,4 @@ if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
     (my_source.getProducts("Holiday Candy Corp, Inc."))
-    # (my_source.getIngredients("JELLY WREATHS"))
+    # (my_source.getIngredients("JELLY WREATHS"))git p
