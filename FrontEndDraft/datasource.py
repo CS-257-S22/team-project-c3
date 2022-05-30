@@ -28,7 +28,7 @@ class DataSource:
         for item in rawDataTuples:
             productString = str(item[0])
             strippedDataList.append(productString)
-
+       
         return(strippedDataList)
 
 

@@ -14,7 +14,8 @@ class TestDataSource(unittest.TestCase):
     
     def testStripOutJunk(self):
     "Test to strip out the junk method"
-    response = DataSource 
+    myresponse= "GUMMI SANTAS"
+    response[] = DataSource.stripProducts() 
     def testGetProducts(self):
     "Method to test getProducts method"
     result = data.getAllProducts("G. T. Japan, Inc.")
