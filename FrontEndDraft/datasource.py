@@ -43,35 +43,18 @@ class DataSource:
 
     def getProducts(self, brand):
         '''Gather the products associated with the given brandName'''
-
-        # cursor = self.theConnection.cursor()
-        # query = "SELECT productName FROM products WHERE brandName=%s"
-        # cursor.execute(query, (brand,))
-        # brandProducts = (cursor.fetchall())
-        # return brandProducts
         brandProducts = self.queryRequest("SELECT productName FROM products WHERE brandName=%s", brand)
         print("Printing brand products: ", brandProducts)
         return self.stripProducts(brandProducts)
 
     def getAllProducts(self):
         '''Gather every product name included in the dataset'''
-
-        # cursor = self.theConnection.cursor()
-        # query = "SELECT productName FROM products"
-        # cursor.execute(query,)
-        # allProducts = (cursor.fetchall())
-        # return allProducts
         allProducts = self.queryRequest("SELECT productName FROM products", None)
         print("Printing all products: ", allProducts)
         return self.stripProducts(allProducts)
     
     def getIngredients(self, theProduct):
         '''Gathers the list of ingredients from the given product'''
-    
-        # cursor = self.theConnection.cursor()
-        # query = "SELECT ingredients FROM products WHERE productName=%s"
-        # cursor.execute(query, (theProduct,))
-        # allProducts = (cursor.fetchall())
         allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
         print("Printing all ingredients: ", allIngredients)
         return allIngredients
