@@ -23,6 +23,7 @@ class DataSource:
         '''Strip out the leading and trailing parantheses and apostrophes
         '''
         strippedDataList = []
+        print(rawDataTuples[0])
         for item in rawDataTuples:
             productString = str(item[0])
             strippedDataList.append(productString)
@@ -55,7 +56,7 @@ class DataSource:
     
     def getIngredients(self, theProduct):
         '''Gathers the list of ingredients from the given product'''
-
+    
         cursor = self.theConnection.cursor()
         query = "SELECT ingredients FROM products WHERE productName=%s"
         cursor.execute(query, (theProduct,))

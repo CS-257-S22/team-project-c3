@@ -32,7 +32,8 @@ class TestDataSource(unittest.TestCase):
         # expectedResult = "GUMMI SANTAS" 
         # self.assertEqual(compare)
 
-    # def testGetIngredients(self):
+    def testGetIngredients(self):
+        
     #     "Method to test the getIngredients method"
 
 if __name__== '__main__':
