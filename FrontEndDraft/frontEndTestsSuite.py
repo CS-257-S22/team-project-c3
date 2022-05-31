@@ -8,7 +8,7 @@ class TestDataSource(unittest.TestCase):
     #     data = DataSource()
        
     def setUp(self):
-        # theConnection = DataSource.connect(self)
+        self.theConnection = DataSource.connect(self)
         pass
     
     def testStripOutJunk(self):
@@ -20,6 +20,9 @@ class TestDataSource(unittest.TestCase):
 
     def testGetProductsFirstItemInResult(self):
         "Method to test getProducts method"
+        # strippedProducts = 
+        with mock.patch('datasource.DataSource.stripProducts') as mockload:
+            mockload.return_value = ['GUMMI SANTAS', 'SPICE DROPS', 'JELLY WREATHS', 'JELLY SANTAS & TREES', 'CRUSHED PEPPERMINT TWISTS', 'CHERRY SLICES', 'HOLIDAY GUMMIES', 'HOLIDAY GEMS', 'SMARTIES', 'GUMMY BEARS', 'PSYCHEDELIC JAWBREAKERS']
         theReturnedProducts = DataSource.getProducts(self, "Holiday Candy Corp, Inc.")
         expectedResult = "GUMMI SANTAS"
         firstResult = theReturnedProducts[0]
