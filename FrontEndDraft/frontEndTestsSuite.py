@@ -4,8 +4,8 @@ from datasource import *
 from unittest import TestCase, mock 
 
 class TestDataSource(unittest.TestCase):
-    def __init__(self):
-        data = DataSource()
+    # def __init__(self):
+    #     data = DataSource()
        
     def setUp(self):
         pass
@@ -17,18 +17,18 @@ class TestDataSource(unittest.TestCase):
         # response = DataSource.getProducts(self, brand)
         tupleWithJunk = ("Bogus Product Name", "Bogus Brand Name", "Bogus Ingredients")
         expectedResult = ["Bogus Product Name", "Bogus Brand Name", "Bogus Ingredients"]
-        stripedResult = datasource.DataSource.stripOutJunk(tupleWithJunk)
+        stripedResult = DataSource.stripOutJunk(self, tupleWithJunk)
         self.assertEqual(stripedResult, expectedResult)
         print(response[0])
     
-    def testGetProducts(self):
-        "Method to test getProducts method"
-        result = self.data.getAllProducts("G. T. Japan, Inc.")
-        firstResult = result[0]
-        expectedResult = "GUMMI SANTAS" 
-        self.assertEqual(compare)
-    def testGetIngredients(self):
-        "Method to test the getIngredients method"
+    # def testGetProducts(self):
+    #     "Method to test getProducts method"
+    #     result = self.data.getAllProducts("G. T. Japan, Inc.")
+    #     firstResult = result[0]
+    #     expectedResult = "GUMMI SANTAS" 
+    #     self.assertEqual(compare)
+    # def testGetIngredients(self):
+    #     "Method to test the getIngredients method"
 
 if __name__== '__main__':
     unittest.main()
