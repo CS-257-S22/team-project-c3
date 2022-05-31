@@ -12,9 +12,13 @@ class TestDataSource(unittest.TestCase):
     
     def testStripOutJunk(self):
         "Test to strip out the junk method"
-        myresponse= "GUMMI SANTAS" # this is the first row of the array
-        brand = "Holiday Candy Corp, Inc."
-        response = DataSource.getProducts(self, brand)
+        # myresponse= "GUMMI SANTAS" # this is the first row of the array
+        # brand = "Holiday Candy Corp, Inc."
+        # response = DataSource.getProducts(self, brand)
+        tupleWithJunk = ("Bogus Product Name", "Bogus Brand Name", "Bogus Ingredients")
+        expectedResult = ["Bogus Product Name", "Bogus Brand Name", "Bogus Ingredients"]
+        stripedResult = datasource.DataSource.stripOutJunk(tupleWithJunk)
+        self.assertEqual(stripedResult, expectedResult)
         print(response[0])
     
     def testGetProducts(self):
