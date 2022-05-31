@@ -30,6 +30,8 @@ class DataSource:
         return(strippedDataList)
 
     def queryRequest(self, theQueryString, secondaryArgumentString):
+        '''Facilitate the query request to the database. Can be utilized w/ or w/out a 
+        secondary argument. Returns the fetched data.'''
         cursor = self.theConnection.cursor()
         if None != secondaryArgumentString:
             cursor.execute(theQueryString, (secondaryArgumentString,))
