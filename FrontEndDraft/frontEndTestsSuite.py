@@ -8,6 +8,7 @@ class TestDataSource(unittest.TestCase):
     #     data = DataSource()
        
     def setUp(self):
+        # theConnection = DataSource.connect(self)
         pass
     
     def testStripOutJunk(self):
@@ -17,13 +18,17 @@ class TestDataSource(unittest.TestCase):
         stripedResult = DataSource.stripOutJunk(self, tupleWithJunk)
         self.assertEqual(stripedResult, expectedResult)
 
-    
-    # def testGetProducts(self):
-    #     "Method to test getProducts method"
-    #     result = self.data.getAllProducts("G. T. Japan, Inc.")
-    #     firstResult = result[0]
-    #     expectedResult = "GUMMI SANTAS" 
-    #     self.assertEqual(compare)
+    def testGetProductsFirstItemInResult(self):
+        "Method to test getProducts method"
+        theReturnedProducts = DataSource.getProducts(self, "Holiday Candy Corp, Inc.")
+        expectedResult = "GUMMI SANTAS"
+        firstResult = theReturnedProducts[0]
+        self.assertEqual(expectedResult, firstResult)
+        # result = self.data.getAllProducts("G. T. Japan, Inc.")
+        # firstResult = result[0]
+        # expectedResult = "GUMMI SANTAS" 
+        # self.assertEqual(compare)
+
     # def testGetIngredients(self):
     #     "Method to test the getIngredients method"
 
