@@ -23,12 +23,13 @@ class DataSource:
     def stripOutJunk(self, rawDataTuples):
         '''Strip out the leading and trailing parantheses and apostrophes
         '''
-
+        print("Printing the raw tuples: ", rawDataTuples)
         strippedDataList = []
         for item in rawDataTuples:
             productString = str(item[0])
+            print("The product string: ", productString)
             strippedDataList.append(productString)
-       
+        print("The full stripped list: ", strippedDataList)
         return(strippedDataList)
 
 
@@ -73,5 +74,6 @@ class DataSource:
 if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
-    (my_source.getProducts("Holiday Candy Corp, Inc."))
+    # (my_source.getProducts("Holiday Candy Corp, Inc."))
+    my_source.getProducts("FRESH & EASY")
     # (my_source.getIngredients("JELLY WREATHS"))git p
