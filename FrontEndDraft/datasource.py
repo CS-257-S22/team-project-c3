@@ -56,7 +56,7 @@ class DataSource:
     
     def getIngredients(self, theProduct):
         '''Gathers the list of ingredients from the given product'''
-
+    
         cursor = self.theConnection.cursor()
         query = "SELECT ingredients FROM products WHERE productName=%s"
         cursor.execute(query, (theProduct,))

@@ -16,19 +16,8 @@ databaseQuery = DataSource() #initializes new object of datasource
 def homepage():
     return render_template('home.html', rows=get_all_products())
 
-'''We are temporarily keeping this commented out code for reference'''
-# def load_data():
-#     with open('SampleData.csv', newline='') as f:
-#         reader = csv.reader(f)
-#         for row in reader:
-#             data.append(row)
 
-# def getRowTitles():
-#     row_titles = []
-#     for row in data:
-#         row_titles.append(row[0])
 
-#     return row_titles
 
 def getRowByTitle(title):
     for row in data:
@@ -64,7 +53,9 @@ def get_all_products():
 def display_product_info_list():
     '''renders the product info page given the product information'''
     ingredients = get_ingredients_from_database(request.form['product']) #need to figure out how you pass the product name that was selected in the autofill bar
-    return render_template('productInfo.html', product="TO DO", brand="brand", ingredients=ingredients) #how do you also include the brandname info so the template can display it
+    return render_template('productInfo.html', product=get_products_from_database(brand), brand="brand", ingredients=ingredients) #how do you also include the brandname info so the template can display it
+    
+    # return render_template('productInfo.html', product=, brand="brand", ingredients=ingredients) #how do you also include the brandname info so the template can display it
     #if we want autofill bar available on this page, do we need to also pass rows=get_all_products?
 
 @app.route('/aboutPage')
