@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-*" />
         
-        <link rel="stylesheet" href="{{ url_for('static', filename='front_end.css') }}"><title>productInfo</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='front_end.css') }}"><title>MultipleProductsInfo</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">  
         </script>  
         
@@ -57,23 +57,7 @@
                             });
                         } );
                     </script>
-                <!-- <p>Dropdown version: Which row would you like to see?</p> 
-                <form action="rowbytitle">
-                    <input type="text" id="tags">
-                    <script>
-                        $( function() {
-                            var availableTags = [
-                                {% for product in rows %}
-                                    "{{product}}",
-                                {% endfor %}
-                            ];
-                            $( "#tags" ).autocomplete({
-                                source: availableTags
-                            });
-                        } );
-
-                    </script>
-                    !-->
+                
                     <input type="submit" value="Submit">
                 </form>
             </div>

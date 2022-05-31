@@ -71,6 +71,3 @@ class DataSource:
 if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
-    # (my_source.getProducts("Holiday Candy Corp, Inc."))
-    print(my_source.getProducts("Holiday Candy Corp, Inc."))
-    # (my_source.getIngredients("JELLY WREATHS"))git p
