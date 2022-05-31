@@ -19,10 +19,10 @@ class TestDataSource(unittest.TestCase):
     
     def testGetProducts(self):
         "Method to test getProducts method"
-        result = self.data.getAllProducts("G. T. Japan, Inc.")
-        firstResult = result[0]
+        products = self.data.getAllProducts("Holiday Candy Corp, Inc.")
+        givenResult = products[0]
         expectedResult = "GUMMI SANTAS" 
-        self.assertEqual(compare)
+        self.assertEqual(expectedResult, givenResult)
     def testGetIngredients(self):
         "Method to test the getIngredients method"
 
