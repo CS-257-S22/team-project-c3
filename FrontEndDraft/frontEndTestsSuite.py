@@ -8,19 +8,22 @@ class TestDataSource(unittest.TestCase):
     #     data = DataSource()
        
     def setUp(self):
-        # theConnection = DataSource.connect(self)
+        self.theConnection = DataSource.connect(self)
         pass
     
     def testStripOutJunk(self):
         "Test to strip out the junk method"
         tupleWithJunk = [('MIXED MELON SPEARS',), ('EGG WHITE OMELETTINI',), ('COCKTAIL ONIONS',), ('CHUNK WHITE ALBACORE TUNA IN WATER',), ('SEASONAL COOKIE PLATTER',), ('CRACKERS',), ('WHITE WINE VINEGAR',)]
         expectedResult = ['MIXED MELON SPEARS', 'EGG WHITE OMELETTINI', 'COCKTAIL ONIONS', 'CHUNK WHITE ALBACORE TUNA IN WATER', 'SEASONAL COOKIE PLATTER', 'CRACKERS', 'WHITE WINE VINEGAR']
-        stripedResult = DataSource.stripOutJunk(self, tupleWithJunk)
+        stripedResult = DataSource().stripOutJunk(tupleWithJunk)
         self.assertEqual(stripedResult, expectedResult)
 
     def testGetProductsFirstItemInResult(self):
         "Method to test getProducts method"
-        theReturnedProducts = DataSource.getProducts(self, "Holiday Candy Corp, Inc.")
+        # strippedProducts = 
+        with mock.patch('datasource.DataSource.stripProducts') as mockload:
+            mockload.return_value = ['GUMMI SANTAS', 'SPICE DROPS', 'JELLY WREATHS', 'JELLY SANTAS & TREES', 'CRUSHED PEPPERMINT TWISTS', 'CHERRY SLICES', 'HOLIDAY GUMMIES', 'HOLIDAY GEMS', 'SMARTIES', 'GUMMY BEARS', 'PSYCHEDELIC JAWBREAKERS']
+        theReturnedProducts = DataSource().getProducts("Holiday Candy Corp, Inc.")
         expectedResult = "GUMMI SANTAS"
         firstResult = theReturnedProducts[0]
         self.assertEqual(expectedResult, firstResult)
