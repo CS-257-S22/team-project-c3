@@ -32,8 +32,17 @@ class TestDataSource(unittest.TestCase):
         # expectedResult = "GUMMI SANTAS" 
         # self.assertEqual(compare)
 
+    def testGetProductsLastItemInResult(self):
+        '''Tests if all of the products of the given brand are returned.'''
+        with mock.patch('datasource.DataSource.stripProducts') as mockload:
+            mockload.return_value = ['GUMMI SANTAS', 'SPICE DROPS', 'JELLY WREATHS', 'JELLY SANTAS & TREES', 'CRUSHED PEPPERMINT TWISTS', 'CHERRY SLICES', 'HOLIDAY GUMMIES', 'HOLIDAY GEMS', 'SMARTIES', 'GUMMY BEARS', 'PSYCHEDELIC JAWBREAKERS']
+        theReturnedProducts = DataSource().getProducts("Holiday Candy Corp, Inc.")
+        expectedResult = "PSYCHEDELIC JAWBREAKERS"
+        lastResult = theReturnedProducts[-1]
+        self.assertEqual(expectedResult, lastResult)
+    
     def testGetIngredients(self):
-        
+        pass
     #     "Method to test the getIngredients method"
 
 if __name__== '__main__':
