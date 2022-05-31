@@ -63,8 +63,9 @@ class DataSource:
 
     def getProductByIdNumber(self, productIdNumber):
         '''Retrieves a product given a unique idNumber'''
-        theProduct = self.queryRequest("SELECT productName FROM products WHERE idNumber=%d", productIdNumber)
+        theProduct = self.queryRequest("SELECT productName FROM products WHERE idNumber=%s", productIdNumber)
         print(f"Printing the product associated with {productIdNumber}: {theProduct}")
+        return theProduct
 
 
 if __name__ == '__main__':
@@ -72,4 +73,5 @@ if __name__ == '__main__':
     my_source.connect()
     my_source.getProducts("G. T. Japan, Inc.")
     # my_source.getAllProducts()
-    my_source.getIngredients("CUPCAKES")
+    my_source.getIngredients("PIGS LIPS")
+    my_source.getProductByIdNumber("45331214")
