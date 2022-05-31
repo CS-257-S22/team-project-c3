@@ -26,11 +26,9 @@ class TestDataSource(unittest.TestCase):
         theReturnedProducts = DataSource().getProducts("Holiday Candy Corp, Inc.")
         expectedResult = "GUMMI SANTAS"
         firstResult = theReturnedProducts[0]
+        
         self.assertEqual(expectedResult, firstResult)
-        # result = self.data.getAllProducts("G. T. Japan, Inc.")
-        # firstResult = result[0]
-        # expectedResult = "GUMMI SANTAS" 
-        # self.assertEqual(compare)
+        
 
     def testGetProductsLastItemInResult(self):
         '''Tests if all of the products of the given brand are returned.'''
@@ -43,15 +41,11 @@ class TestDataSource(unittest.TestCase):
     
     def testGetIngredients(self):
         "Test to determine whether getIngredients workds"
-        #"Method to test the getIngredients method"
-        with mock.patch ('datasource.DataSource.getIngredients') as mockload:
-            mockload.return_value = 'COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.'
+        "Method to test the getIngredients method"
+       
         theReturnedIngredients = DataSource().getIngredients('PIGS LIPS')
-        
-        firstResult = theReturnedIngredients[0]
-        
-        expectedResult = "COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE." 
-        self.assertEqual(expectedResult, firstResult)
+        expectedResult = [('COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.',)] 
+        self.assertEqual(expectedResult, theReturnedIngredients)
 
 if __name__== '__main__':
     unittest.main()
