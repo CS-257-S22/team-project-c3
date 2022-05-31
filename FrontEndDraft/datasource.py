@@ -25,10 +25,11 @@ class DataSource:
         '''
 
         strippedDataList = []
+        print(rawDataTuples[0])
         for item in rawDataTuples:
             productString = str(item[0])
             strippedDataList.append(productString)
-       
+        print(strippedDataList[0])
         return(strippedDataList)
 
 
