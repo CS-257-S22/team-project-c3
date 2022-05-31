@@ -33,8 +33,16 @@ class TestDataSource(unittest.TestCase):
         # self.assertEqual(compare)
 
     def testGetIngredients(self):
+        "Test to determine whether getIngredients workds"
+        #"Method to test the getIngredients method"
+        with mock.patch ('datasource.DataSource.getIngredients') as mockload:
+            mockload.return_value = 'COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.'
+        theReturnedIngredients = DataSource().getIngredients('PIGS LIPS')
         
-    #     "Method to test the getIngredients method"
+        firstResult = theReturnedIngredients[0]
+        
+        expectedResult = "COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE." 
+        self.assertEqual(expectedResult, firstResult)
 
 if __name__== '__main__':
     unittest.main()
