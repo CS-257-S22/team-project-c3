@@ -43,7 +43,7 @@ class TestProductData(unittest.TestCase):
                         ('pizza', 'brand 1', 'flour, cheese'),
                         ('cereal', 'brand 2', 'oats, sugar, vitamin B'),
                         ('pot pie', 'brand 3', 'flour, beef, potato, onion')]
-        with mock.patch('ProductData.ProductData.load_csv_file') as mockLoad:
+        with mock.patch('what2Eat.ProductData.load_csv_file') as mockLoad:
             mockLoad.return_value = testBrandData
             brands = ProductData('bogus.csv').returnBrands()
         accurateListOfBrands = ["brand 1","brand 2", "brand 3"]
@@ -59,7 +59,7 @@ class TestProductData(unittest.TestCase):
                         ('pizza', 'brand 1', 'flour, cheese'),
                         ('cereal', 'brand 2', 'oats, sugar, vitamin B'),
                         ('pot pie', 'brand 3', 'flour, beef, potato, onion')]
-        with mock.patch('ProductData.ProductData.load_csv_file') as mockLoad:
+        with mock.patch('what2Eat.ProductData.load_csv_file') as mockLoad:
             mockLoad.return_value = testBrandData
             brands = ProductData('bogus.csv').returnBrands()
         self.assertNotIn('pizza', brands)
@@ -72,7 +72,7 @@ class TestProductData(unittest.TestCase):
         testBrandData = [('pizza', 'brand 1', 'flour, cheese'),
                         ('cereal', 'brand 2', 'oats, sugar, vitamin B'),
                         ('pot pie', 'brand 1', 'flour, beef, potato, onion')]
-        with mock.patch('ProductData.ProductData.load_csv_file') as mockLoad:
+        with mock.patch('what2Eat.ProductData.load_csv_file') as mockLoad:
             mockLoad.return_value = testBrandData
             brands = ProductData('bogus.csv').returnBrands()
         self.assertEqual(1, brands.count('brand 1'))
@@ -84,7 +84,7 @@ class TestProductData(unittest.TestCase):
         testBrandData = [('pizza', 'brand 1', 'flour, cheese'),
                         ('cereal', '', 'oats, sugar, vitamin B'),
                         ('pot pie', 'brand 3', 'flour, beef, potato, onion')]
-        with mock.patch('ProductData.ProductData.load_csv_file') as mockLoad:
+        with mock.patch('what2Eat.ProductData.load_csv_file') as mockLoad:
             mockLoad.return_value = testBrandData
             brands = ProductData('bogus.csv').returnBrands()
         self.assertNotIn('', brands)
@@ -96,7 +96,7 @@ class TestProductData(unittest.TestCase):
         to compare results.
         Written by Morgan"""
         testBrandData = [("product_name","brand_name","ingredients")]
-        with mock.patch('ProductData.ProductData.load_csv_file') as mockLoad:
+        with mock.patch('what2Eat.ProductData.load_csv_file') as mockLoad:
             mockLoad.return_value = testBrandData
             brands = ProductData('bogus.csv').returnBrands()   
         self.assertEqual([], brands)
@@ -106,7 +106,7 @@ class TestProductData(unittest.TestCase):
         totally empty. The test function uses a small sample of data to compare results.
         Written by Morgan"""
         testBrandData = []
-        with mock.patch('ProductData.ProductData.load_csv_file') as mockLoad:
+        with mock.patch('what2Eat.ProductData.load_csv_file') as mockLoad:
             mockLoad.return_value = testBrandData
             brands = ProductData('bogus.csv').returnBrands()
         self.assertEqual([], brands)
@@ -116,7 +116,7 @@ class TestProductData(unittest.TestCase):
         the file passed doesn't exist. 
         The test function uses a small sample of data to compare results.
         Written by Morgan"""
-        with mock.patch("ProductData.ProductData.load_csv_file") as mockLoad:
+        with mock.patch("what2Eat.ProductData.load_csv_file") as mockLoad:
             mockLoad.side_effect = FileNotFoundError
             with self.assertRaises(FileNotFoundError):
                 brands = ProductData('bogus.csv').returnBrands()
