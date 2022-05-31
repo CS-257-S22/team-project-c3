@@ -23,12 +23,19 @@ class DataSource:
         '''Strip out the leading and trailing parantheses and apostrophes
         '''
         strippedDataList = []
-        print(rawDataTuples[0])
+        # print(rawDataTuples[0])
         for item in rawDataTuples:
             productString = str(item[0])
             strippedDataList.append(productString)
         return(strippedDataList)
 
+    def queryRequest(self, theQueryString, secondaryArgumentString):
+        cursor = self.theConnection.cursor()
+        if None != secondaryArgumentString:
+            cursor.execute(theQueryString, (secondaryArgumentString,))
+        else:
+            cursor.execute(theQueryString,)
+        return (cursor.fetchall())
 
     def stripProducts(self, products):
         '''Strip the prodcuts of leading parantheses and apostrophes'''
@@ -36,38 +43,26 @@ class DataSource:
 
     def getProducts(self, brand):
         '''Gather the products associated with the given brandName'''
-
-        cursor = self.theConnection.cursor()
-        query = "SELECT productName FROM products WHERE brandName=%s"
-        cursor.execute(query, (brand,))
-        brandProducts = (cursor.fetchall())
-        # return brandProducts
+        brandProducts = self.queryRequest("SELECT productName FROM products WHERE brandName=%s", brand)
+        print("Printing brand products: ", brandProducts)
         return self.stripProducts(brandProducts)
 
     def getAllProducts(self):
         '''Gather every product name included in the dataset'''
-
-        cursor = self.theConnection.cursor()
-        query = "SELECT productName FROM products"
-        cursor.execute(query,)
-        allProducts = (cursor.fetchall())
-        # return allProducts
+        allProducts = self.queryRequest("SELECT productName FROM products", None)
+        print("Printing all products: ", allProducts)
         return self.stripProducts(allProducts)
     
     def getIngredients(self, theProduct):
         '''Gathers the list of ingredients from the given product'''
-    
-        cursor = self.theConnection.cursor()
-        query = "SELECT ingredients FROM products WHERE productName=%s"
-        cursor.execute(query, (theProduct,))
-        allProducts = (cursor.fetchall())
-        return allProducts
-
-
-
-        
+        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
+        print("Printing all ingredients: ", allIngredients)
+        return allIngredients
 
 
 if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
+    my_source.getProducts("G. T. Japan, Inc.")
+    # my_source.getAllProducts()
+    my_source.getIngredients("CUPCAKES")
