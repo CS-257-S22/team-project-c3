@@ -86,13 +86,14 @@ class DataSource:
         allBrandsFromIdenticalProducts = self.queryRequest("SELECT brandName FROM products WHERE productName=%s", theProduct)
         return self.stripOutJunk(allBrandsFromIdenticalProducts)
     
-    def getIngredients(self, theProduct):
+    def getIngredients(self, theProduct, theBrand):
         '''
         PARAMETER:  theProduct:   desired product that query will search for 
+        PARAMETER: theBrand: the brand associated with the desired product
         RETURN:     ingredients that query retrieved
         PURPOSE:    Gathers a list of ingredients from the given product
         '''        
-        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
+        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s AND brandName=%s", theProduct, theBrand)
         #print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
