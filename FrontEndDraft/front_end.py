@@ -46,18 +46,17 @@ def get_all_products():
     allProducts = databaseQuery.getAllProducts()
     return allProducts
 
-@app.route('multiProducts', methods['POST'])
-def display_brands_from_identical_products(product);
+@app.route('/multiProducts', methods=['POST'])
+def display_brands_from_identical_products():
     '''
     PARAMETER: product: product name that method is looking for identical copies for 
     RETURN: result of query getAllBrandsFromIdenticalProducts (a list of brands where each brand has an item that is same as brand)
     PURPOSE:App route to the multiProducts webpage. This method is intended to pass
     the necessary variables to the template so that it can generate dynamic
-    radio buttons
+    drop down
     '''
-    
-    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(product)
-    return render_template('multiProducts', products=get_brand_from_database())
+    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(request.form['product'])
+    return render_template('multiProducts.html', products='foo', brands=allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['POST'])
 def display_product_info_list():

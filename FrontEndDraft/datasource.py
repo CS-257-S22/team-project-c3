@@ -96,7 +96,8 @@ class DataSource:
         PARAMETER:  theProduct:   desired product that query will search for 
         RETURN:     ingredients that query retrieved
         PURPOSE:    Gathers a list of ingredients from the given product
-        '''        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
+        '''        
+        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
         #print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
@@ -121,12 +122,12 @@ class DataSource:
         return theProduct
 
     def getBrandByIdNumber(self, idNumber):
-    '''
-    PARAMETER: idNumber: returns brandname of the product whose id number matches that of the parameter
-	RETURN: Retrieves a brand title given the Id number of the product       
-    PURPOSE: runs a query to find brand through a product's id number 
-    '''
-         brand = self.queryRequest("SELECT brandName FROM products WHERE idNumber=%s", idNumber)
+        '''
+        PARAMETER: idNumber: returns brandname of the product whose id number matches that of the parameter
+        RETURN: Retrieves a brand title given the Id number of the product       
+        PURPOSE: runs a query to find brand through a product's id number 
+        '''
+        brand = self.queryRequest("SELECT brandName FROM products WHERE idNumber=%s", idNumber)
         print(f"Printing the brand associated with {idNumber}: {brand}")
 
         return brand 
