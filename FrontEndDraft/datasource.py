@@ -23,7 +23,6 @@ class DataSource:
         '''Strip out the leading and trailing parantheses and apostrophes
         '''
         strippedDataList = []
-        # print(rawDataTuples[0])
         for item in rawDataTuples:
             productString = str(item[0])
             strippedDataList.append(productString)
@@ -46,25 +45,25 @@ class DataSource:
     def getProducts(self, brand):
         '''Gather the products associated with the given brandName'''
         brandProducts = self.queryRequest("SELECT productName FROM products WHERE brandName=%s", brand)
-        print("Printing brand products: ", brandProducts)
+        #print("Printing brand products: ", brandProducts)
         return self.stripProducts(brandProducts)
 
     def getAllProducts(self):
         '''Gather every product name included in the dataset'''
         allProducts = self.queryRequest("SELECT productName FROM products", None)
-        print("Printing all products: ", allProducts)
+        #print("Printing all products: ", allProducts)
         return self.stripProducts(allProducts)
     
     def getIngredients(self, theProduct):
         '''Gathers the list of ingredients from the given product'''
         allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
-        print("Printing all ingredients: ", allIngredients)
+        #print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
     def getProductByIdNumber(self, productIdNumber):
         '''Retrieves a product given a unique idNumber'''
         theProduct = self.queryRequest("SELECT productName FROM products WHERE idNumber=%s", productIdNumber)
-        print(f"Printing the product associated with {productIdNumber}: {theProduct}")
+        #print(f"Printing the product associated with {productIdNumber}: {theProduct}")
         return theProduct
 
 
