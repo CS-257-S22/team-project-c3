@@ -10,5 +10,5 @@ Team members:
 make another page that is from brands
 pass to the template and get things from the result of the users 
 through that way we will be able to pass things around and save anything in the python side 
-A
+
 Add in return and parameters 
