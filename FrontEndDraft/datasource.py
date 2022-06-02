@@ -31,11 +31,6 @@ class DataSource:
             strippedDataList.append(productString)
         return(strippedDataList)
 
-        '''
-        INPUT:       
-        RETURN:     
-        PURPOSE:    
-        '''
 
     def queryRequest(self, theQueryString, secondaryArgumentString):
          '''
@@ -65,7 +60,7 @@ class DataSource:
 
     def getProducts(self, brand):
         '''
-        INPUT: brand: brand getting passed into query     
+        PARAMETER: brand: brand getting passed into query     
         RETURN: stripped productes of queryRequest with brand 
         PURPOSE:  Gather the products associated with the given brandName  
         '''
@@ -74,38 +69,60 @@ class DataSource:
         return self.stripOutJunk(brandProducts)
 
     def getAllProducts(self):
-
-        '''Gather every product name included in the dataset'''
+        '''
+        PARAMETER  N/A     
+        RETURN:   Every product name in the dataset 
+        PURPOSE: Gather every product name included in the dataset
+        '''
         allProducts = self.queryRequest("SELECT productName FROM products", None)
         #print("Printing all products: ", allProducts)
         return self.stripOutJunk(allProducts)
 
     def getAllBrandsFromIdenticalProducts(self, theProduct):
-        '''Gather every brand from the dataset that has the given product'''
+        '''
+        PARAMETER: theProduct: the product of which the query is looking for 
+        RETURN: all brands that have a product that matches theProduct
+        PURPOSE: Query to find all brand names that have the same product name as a given product
+        '''
         allBrandsFromIdenticalProducts = self.queryRequest("SELECT brandName FROM products WHERE productName=%s", theProduct)
         return self.stripOutJunk(allBrandsFromIdenticalProducts)
     
     def getIngredients(self, theProduct):
-        '''Gathers the list of ingredients from the given product'''
-        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
+        '''
+        PARAMETER:  theProduct:   desired product that query will search for 
+        RETURN:     ingredients that query retrieved
+        PURPOSE:    Gathers a list of ingredients from the given product
+        '''        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s", theProduct)
         #print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
     def getIngredientsByIdNumber(self, productIdNumber):
-        '''Gathers the list of ingredients from the given product'''
+        '''
+        PARAMETER: productIdNumber: id number of the product we are searching for 
+        RETURN: Name of product that corresponds to product 
+        PURPOSE: Gathers the ingredients by looking for it’s ID number 
+        '''
         allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE idNumber=%s", productIdNumber)
         print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
     def getProductByIdNumber(self, productIdNumber):
-        '''Retrieves a product given a unique idNumber'''
+        '''
+        PARAMETER: productIdNumber: Id number of the product we are looking for 
+        RETURN: returns the product to the corresponding ID
+        PURPOSE: Query that looks for product name that matches the ID number 
+        '''
         theProduct = self.queryRequest("SELECT productName FROM products WHERE idNumber=%s", productIdNumber)
         #print(f"Printing the product associated with {productIdNumber}: {theProduct}")
         return theProduct
 
     def getBrandByIdNumber(self, idNumber):
-        "Retreives a brand title given the ID number of a product"
-        brand = self.queryRequest("SELECT brandName FROM products WHERE idNumber=%s", idNumber)
+    '''
+    PARAMETER: idNumber: returns brandname of the product whose id number matches that of the parameter
+	RETURN: Retrieves a brand title given the Id number of the product       
+    PURPOSE: runs a query to find brand through a product's id number 
+    '''
+         brand = self.queryRequest("SELECT brandName FROM products WHERE idNumber=%s", idNumber)
         print(f"Printing the brand associated with {idNumber}: {brand}")
 
         return brand 
