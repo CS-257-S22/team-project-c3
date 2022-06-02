@@ -33,14 +33,13 @@ class DataSource:
 
 
     def queryRequest(self, theQueryString, secondaryArgumentString):
-         '''
+        '''
         PARAMETER: theQueryString: string of the query that will be executed
         PARAMETER: secondaryArgumentString: the secondary parameter for the query. Not all queries use it. 
         RETURN:    Returned value of query executed
         PURPOSE:   Facilitate the query request to the database. Can be utilized w/ or w/out a 
         secondary argument. Returns the fetched data.
         '''
-       
         cursor = self.theConnection.cursor()
         if None != secondaryArgumentString:
             cursor.execute(theQueryString, (secondaryArgumentString,))

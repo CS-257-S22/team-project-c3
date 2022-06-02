@@ -16,7 +16,6 @@ databaseQuery = DataSource() #initializes new object of datasource
 def homepage():
     return render_template('home.html', rows=get_all_products())
 
-
 def get_ingredients_from_database(theProduct):
     '''
     PARAMETER: theProduct: Producut that the query is searching for
@@ -70,12 +69,7 @@ def display_product_info_list():
 
     ingredients = get_ingredients_from_database(request.form['product']) #need to figure out how you pass the product name that was selected in the autofill bar
     brand = "FRESH & EASY"
-    brand = 
-    return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients) #how do you also include the brandname info so the template can display it
-    
-    # return render_template('productInfo.html', product=, brand="brand", ingredients=ingredients) #how do you also include the brandname info so the template can display it
-    #if we want autofill bar available on this page, do we need to also pass rows=get_all_products?
-
+    return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients)
 
 @app.route('/aboutPage')
 def display_about_page():
