@@ -17,22 +17,20 @@ def homepage():
     return render_template('home.html', rows=get_all_products())
 
 
+# def getRowByTitle(title):
+#     for row in data:
+#         if row[0] == title:
+#             return row
+#     return []
 
+# @app.route('/rowbytitle', methods=['POST'])
+# def display_row_by_title():
+#     value = getRowByTitle(request.form['rowchoice'])
+#     product = value[0]
+#     brand = value[1]
+#     ingredients = value[2].split(',')
 
-def getRowByTitle(title):
-    for row in data:
-        if row[0] == title:
-            return row
-    return []
-
-@app.route('/rowbytitle', methods=['POST'])
-def display_row_by_title():
-    value = getRowByTitle(request.form['rowchoice'])
-    product = value[0]
-    brand = value[1]
-    ingredients = value[2].split(',')
-
-    return render_template('productInfo.html', product="product", brand="brand", ingredients=ingredients)
+#     return render_template('productInfo.html', product="product", brand="brand", ingredients=ingredients)
 
 def get_ingredients_from_database(theProduct):
     '''Helper function to retrieve ingredients from database'''
@@ -51,6 +49,14 @@ def get_all_products():
     '''Helper funtion to retrieve all of the products in the database'''
     allProducts = databaseQuery.getAllProducts()
     return allProducts
+
+@app.route('multiProducts', methods['POST'])
+def display_brands_from_identical_products(product);
+    '''App route to the multiProducts webpage. This method is intended to pass
+    the necessary variables to the template so that it can generate dynamic
+    radio buttons.'''
+    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(product)
+    return render_template('multiProducts', products=get_brand_from_database())
 
 @app.route('/productInfo', methods=['POST'])
 def display_product_info_list():

@@ -38,21 +38,26 @@ class DataSource:
             cursor.execute(theQueryString,)
         return (cursor.fetchall())
 
-    def stripProducts(self, products):
-        '''Strip the prodcuts of leading parantheses and apostrophes'''
-        return self.stripOutJunk(products)
+    # def stripProducts(self, products):
+    #     '''Strip the prodcuts of leading parantheses and apostrophes'''
+    #     return self.stripOutJunk(products)
 
     def getProducts(self, brand):
         '''Gather the products associated with the given brandName'''
         brandProducts = self.queryRequest("SELECT productName FROM products WHERE brandName=%s", brand)
         #print("Printing brand products: ", brandProducts)
-        return self.stripProducts(brandProducts)
+        return self.stripOutJunk(brandProducts)
 
     def getAllProducts(self):
         '''Gather every product name included in the dataset'''
         allProducts = self.queryRequest("SELECT productName FROM products", None)
         #print("Printing all products: ", allProducts)
-        return self.stripProducts(allProducts)
+        return self.stripOutJunk(allProducts)
+
+    def getAllBrandsFromIdenticalProducts(self, theProduct):
+        '''Gather every brand from the dataset that has the given product'''
+        allBrandsFromIdenticalProducts = self.queryRequest("SELECT brandName FROM products WHERE productName=%s", theProduct)
+        return self.stripOutJunk(allBrandsFromIdenticalProducts)
     
     def getIngredients(self, theProduct):
         '''Gathers the list of ingredients from the given product'''
