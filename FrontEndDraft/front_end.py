@@ -14,6 +14,11 @@ databaseQuery = DataSource() #initializes new object of datasource
 
 @app.route('/')
 def homepage():
+    '''
+    PARAMETER: N/A
+    RETURN: template for homepage
+    PURPOSE: renders template for the homepage
+    '''
     return render_template('home.html', rows=get_all_products())
 
 def get_ingredients_from_database(theProduct):
@@ -22,7 +27,6 @@ def get_ingredients_from_database(theProduct):
     RETURN: return the results of the query getIngredients
     PURPOSE: Helper function to retrieve ingredients from database
     '''
-    
     
     theIngredients = databaseQuery.getIngredients(theProduct)
     return theIngredients
@@ -86,7 +90,7 @@ def page_not_found(e):
     RETURN: template for 404 page
     PURPOSE: Renders template for our 404.html page
     '''
-     return render_template('404.html', rows=get_all_products()) #need rows so that autofill bar is still available
+    return render_template('404.html', rows=get_all_products()) #need rows so that autofill bar is still available
 
 @app.errorhandler(500)
 def internal_server_error(e): 
@@ -95,7 +99,6 @@ def internal_server_error(e):
     RETURN: returns error message 
     PURPOSE: tells coders when there is internal error in program
     '''
-    
     
     return "Hmmmm, that didn't seem to work. Use /5111 to return to the homepage and /5111/Products/brandName<br>" \
         "to query the products for the requested brand."

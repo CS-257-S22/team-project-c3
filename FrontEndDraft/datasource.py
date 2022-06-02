@@ -14,7 +14,8 @@ class DataSource:
     def connect(self):
         '''
         PARAMETER: N/A
-        RETURN: 
+        RETURN: returns connection to SQL query
+        PURPOSE: Creates a connection to the products database
         '''
 
         try:
@@ -135,9 +136,5 @@ class DataSource:
 if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
-    my_source.getProducts("G. T. Japan, Inc.")
-    # my_source.getAllProducts()
-    # my_source.getIngredients("PIGS LIPS")
-    # my_source.getProductByIdNumber("45331214")
-    # my_source.getBrandByIdNumber("45331214")
-    # my_source.getIngredientsByIdNumber("45331214")
+    
+   
