@@ -32,12 +32,12 @@ def get_all_products():
     return allProducts
 
 @app.route('/multiProducts', methods=['POST'])
-def display_brands_from_identical_products(product):
+def display_brands_from_identical_products():
     '''App route to the multiProducts webpage. This method is intended to pass
     the necessary variables to the template so that it can generate dynamic
     radio buttons.'''
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(request.form['product'])
-    return render_template('multiProducts.html', products=get_brand_from_database(), brands=allBrandsFromIdenticalProducts)
+    return render_template('multiProducts.html', products='foo', brands=allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['POST'])
 def display_product_info_list():
