@@ -33,19 +33,19 @@ class DataSource:
 
         '''
         INPUT:       
-        PARAMETER:     
+        RETURN:     
         PURPOSE:    
         '''
 
     def queryRequest(self, theQueryString, secondaryArgumentString):
          '''
         PARAMETER: theQueryString: string of the query that will be executed
-        PARAMETER: the secondary parameter for the query. Not all queries use it. 
-        RETURN:    Returned value of query 
-        PURPOSE:    
+        PARAMETER: secondaryArgumentString: the secondary parameter for the query. Not all queries use it. 
+        RETURN:    Returned value of query executed
+        PURPOSE:   Facilitate the query request to the database. Can be utilized w/ or w/out a 
+        secondary argument. Returns the fetched data.
         '''
-        '''Facilitate the query request to the database. Can be utilized w/ or w/out a 
-        secondary argument. Returns the fetched data.'''
+       
         cursor = self.theConnection.cursor()
         if None != secondaryArgumentString:
             cursor.execute(theQueryString, (secondaryArgumentString,))
@@ -54,16 +54,27 @@ class DataSource:
         return (cursor.fetchall())
 
     def stripProducts(self, products):
-        '''Strip the prodcuts of leading parantheses and apostrophes'''
+        '''
+        PARAMETER: products: un-stripped list of products with lots of extra characters that need to go. 
+        RETURN:    product list where each item is a stripped string
+        PURPOSE:   Strip the prodcuts of leading parantheses and apostrophes
+        '''
+       
         return self.stripOutJunk(products)
 
+
     def getProducts(self, brand):
-        '''Gather the products associated with the given brandName'''
+        '''
+        INPUT: brand: brand getting passed into query     
+        RETURN: stripped productes of queryRequest with brand 
+        PURPOSE:  Gather the products associated with the given brandName  
+        '''
         brandProducts = self.queryRequest("SELECT productName FROM products WHERE brandName=%s", brand)
         #print("Printing brand products: ", brandProducts)
         return self.stripProducts(brandProducts)
 
     def getAllProducts(self):
+
         '''Gather every product name included in the dataset'''
         allProducts = self.queryRequest("SELECT productName FROM products", None)
         #print("Printing all products: ", allProducts)
