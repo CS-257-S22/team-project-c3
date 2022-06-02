@@ -12,6 +12,11 @@ class DataSource:
         self.theConnection = self.connect()
 
     def connect(self):
+        '''
+        PARAMETER: N/A
+        RETURN: 
+        '''
+
         try:
             connection = psycopg2.connect(database=config.database, user=config.user, password=config.password, host="localhost")
         except Exception as e:
