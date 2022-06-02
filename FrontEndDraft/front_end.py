@@ -10,7 +10,9 @@ from datasource import *
 app = Flask(__name__)
 
 #data = []
-databaseQuery = DataSource() #initializes new object of datasource 
+databaseQuery = DataSource() #initializes new object of datasource
+brand = '' 
+product = ''
 
 @app.route('/')
 def homepage():
@@ -59,7 +61,8 @@ def display_brands_from_identical_products():
     the necessary variables to the template so that it can generate dynamic
     drop down
     '''
-    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(request.form['product'])
+    product = request.form['product']
+    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(request.form[product])
     return render_template('multiProducts.html', products='foo', brands=allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['POST'])
@@ -69,9 +72,10 @@ def display_product_info_list():
     RETURN: renders template for individual product page
     PURPOSE:renders the product info page given the product information'
     '''
-
-    ingredients = get_ingredients_from_database(request.form['product']) #need to figure out how you pass the product name that was selected in the autofill bar
-    brand = "FRESH & EASY"
+    brand = request.form['brand']
+    product = request.form['product']
+    ingredients = get_ingredients_from_database(request.form['product', 'brand'])
+    # brand = "FRESH & EASY"
     return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients)
 
 @app.route('/aboutPage')
@@ -81,7 +85,7 @@ def display_about_page():
     RETURN: template for about page
     PURPOSE: Renders template for our about.html page
     '''
-    return render_template('about.html', rows=get_all_products()) #need rows so that autofill bar is still available
+    return render_template('about.html', rows=get_all_products())
 
 @app.errorhandler(404)
 def page_not_found(e):
