@@ -16,30 +16,11 @@ databaseQuery = DataSource() #initializes new object of datasource
 def homepage():
     return render_template('home.html', rows=get_all_products())
 
-
-# def getRowByTitle(title):
-#     for row in data:
-#         if row[0] == title:
-#             return row
-#     return []
-
-# @app.route('/rowbytitle', methods=['POST'])
-# def display_row_by_title():
-#     value = getRowByTitle(request.form['rowchoice'])
-#     product = value[0]
-#     brand = value[1]
-#     ingredients = value[2].split(',')
-
-#     return render_template('productInfo.html', product="product", brand="brand", ingredients=ingredients)
-
 def get_ingredients_from_database(theProduct):
     '''Helper function to retrieve ingredients from database'''
     theIngredients = databaseQuery.getIngredients(theProduct)
     return theIngredients
 
-# def get_brand_from_database(idNum):
-#     "Helper function to get brand from database"
-#     theBrand = database.Query.getBrandByIdNumber(theIdNum)
 def get_products_from_database(brand):
     '''Helper function to retrieve the prodcuts of the given brand from the database'''
     theProducts = databaseQuery.getProducts(brand)
@@ -50,33 +31,28 @@ def get_all_products():
     allProducts = databaseQuery.getAllProducts()
     return allProducts
 
-@app.route('multiProducts', methods['POST'])
-def display_brands_from_identical_products(product);
+@app.route('/multiProducts', methods=['POST'])
+def display_brands_from_identical_products(product):
     '''App route to the multiProducts webpage. This method is intended to pass
     the necessary variables to the template so that it can generate dynamic
     radio buttons.'''
-    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(product)
-    return render_template('multiProducts', products=get_brand_from_database())
+    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(request.form['product'])
+    return render_template('multiProducts.html', products=get_brand_from_database(), brands=allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['POST'])
 def display_product_info_list():
     '''renders the product info page given the product information'''
-    ingredients = get_ingredients_from_database(request.form['product']) #need to figure out how you pass the product name that was selected in the autofill bar
+    ingredients = get_ingredients_from_database(request.form['product'])
     brand = "FRESH & EASY"
-    brand = 
-    return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients) #how do you also include the brandname info so the template can display it
-    
-    # return render_template('productInfo.html', product=, brand="brand", ingredients=ingredients) #how do you also include the brandname info so the template can display it
-    #if we want autofill bar available on this page, do we need to also pass rows=get_all_products?
-
+    return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients)
 
 @app.route('/aboutPage')
 def display_about_page():
-    return render_template('about.html', rows=get_all_products()) #need rows so that autofill bar is still available
+    return render_template('about.html', rows=get_all_products())
 
 @app.errorhandler(404)
 def page_not_found(e):
-     return render_template('404.html', rows=get_all_products()) #need rows so that autofill bar is still available
+     return render_template('404.html', rows=get_all_products())
 
 @app.errorhandler(500)
 def internal_server_error(e): 

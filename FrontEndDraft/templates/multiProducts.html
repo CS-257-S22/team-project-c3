@@ -64,8 +64,16 @@
             </div>
         </nav>
         <div class="box">
-            <input type="radio" id="html" name="brandSelection" value="HTML">
-                <label for="html">HTML<</label>
+            <p>Select the brand you would like the view.</p>
+            <form action="productInfo">
+                <label for="brands">Choose a brand</label>
+                <select name="brandChoice">
+                    {% for brand in brands: %}
+                    <option value="{{brand}}">{{brand}}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Submit">
+            </form>
         </div>
 
         
