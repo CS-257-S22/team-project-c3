@@ -20,7 +20,10 @@ class DataSource:
         return connection
 
     def stripOutJunk(self, rawDataTuples):
-        '''Strip out the leading and trailing parantheses and apostrophes
+        '''
+        PARAMETER:      rawDataTuples: List of the products stored as a teuples with the product in the first index and nothing in the second one. 
+        RETURN:     A list of strings where each item is stripped of uncessary characters like quotation marks
+        PURPOSE:    Strip out the leading and trailing parantheses and apostrophes
         '''
         strippedDataList = []
         for item in rawDataTuples:
@@ -28,7 +31,19 @@ class DataSource:
             strippedDataList.append(productString)
         return(strippedDataList)
 
+        '''
+        INPUT:       
+        PARAMETER:     
+        PURPOSE:    
+        '''
+
     def queryRequest(self, theQueryString, secondaryArgumentString):
+         '''
+        PARAMETER: theQueryString: string of the query that will be executed
+        PARAMETER: the secondary parameter for the query. Not all queries use it. 
+        RETURN:    Returned value of query 
+        PURPOSE:    
+        '''
         '''Facilitate the query request to the database. Can be utilized w/ or w/out a 
         secondary argument. Returns the fetched data.'''
         cursor = self.theConnection.cursor()
