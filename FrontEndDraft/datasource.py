@@ -60,17 +60,31 @@ class DataSource:
         #print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
+    def getIngredientsByIdNumber(self, productIdNumber):
+        '''Gathers the list of ingredients from the given product'''
+        allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE idNumber=%s", productIdNumber)
+        print("Printing all ingredients: ", allIngredients)
+        return allIngredients
+
     def getProductByIdNumber(self, productIdNumber):
         '''Retrieves a product given a unique idNumber'''
         theProduct = self.queryRequest("SELECT productName FROM products WHERE idNumber=%s", productIdNumber)
         #print(f"Printing the product associated with {productIdNumber}: {theProduct}")
         return theProduct
 
+    def getBrandByIdNumber(self, idNumber):
+        "Retreives a brand title given the ID number of a product"
+        brand = self.queryRequest("SELECT brandName FROM products WHERE idNumber=%s", idNumber)
+        print(f"Printing the brand associated with {idNumber}: {brand}")
+
+        return brand 
 
 if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
     my_source.getProducts("G. T. Japan, Inc.")
     # my_source.getAllProducts()
-    my_source.getIngredients("PIGS LIPS")
-    my_source.getProductByIdNumber("45331214")
+    # my_source.getIngredients("PIGS LIPS")
+    # my_source.getProductByIdNumber("45331214")
+    # my_source.getBrandByIdNumber("45331214")
+    # my_source.getIngredientsByIdNumber("45331214")

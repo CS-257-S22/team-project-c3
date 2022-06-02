@@ -41,8 +41,6 @@ class TestDataSource(unittest.TestCase):
     
     def testGetIngredients(self):
         "Test to determine whether getIngredients workds"
-        
-       
         theReturnedIngredients = DataSource().getIngredients('PIGS LIPS')
         expectedResult = [('COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.',)] 
         self.assertEqual(expectedResult, theReturnedIngredients)

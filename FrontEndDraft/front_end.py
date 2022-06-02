@@ -32,13 +32,16 @@ def display_row_by_title():
     brand = value[1]
     ingredients = value[2].split(',')
 
-    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
+    return render_template('productInfo.html', product="product", brand="brand", ingredients=ingredients)
 
 def get_ingredients_from_database(theProduct):
     '''Helper function to retrieve ingredients from database'''
     theIngredients = databaseQuery.getIngredients(theProduct)
     return theIngredients
 
+# def get_brand_from_database(idNum):
+#     "Helper function to get brand from database"
+#     theBrand = database.Query.getBrandByIdNumber(theIdNum)
 def get_products_from_database(brand):
     '''Helper function to retrieve the prodcuts of the given brand from the database'''
     theProducts = databaseQuery.getProducts(brand)
@@ -53,10 +56,13 @@ def get_all_products():
 def display_product_info_list():
     '''renders the product info page given the product information'''
     ingredients = get_ingredients_from_database(request.form['product']) #need to figure out how you pass the product name that was selected in the autofill bar
+    brand = "FRESH & EASY"
+    brand = 
     return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients) #how do you also include the brandname info so the template can display it
     
     # return render_template('productInfo.html', product=, brand="brand", ingredients=ingredients) #how do you also include the brandname info so the template can display it
     #if we want autofill bar available on this page, do we need to also pass rows=get_all_products?
+
 
 @app.route('/aboutPage')
 def display_about_page():
