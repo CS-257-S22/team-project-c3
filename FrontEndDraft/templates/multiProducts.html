@@ -43,7 +43,7 @@
                     <a href="https://fdc.nal.usda.gov/download-datasets.html" target="_blank">USDA Data Source</a>
                     </li>
                 </ul>
-                <form action="productInfo">
+                <form action="multiProducts" method="post">
                     <input type="text" id="tags">
                     <script>
                         $( function() {
@@ -65,12 +65,14 @@
         </nav>
         <div class="box">
             <p>Select the brand you would like the view.</p>
-            <form action="productInfo">
+            <form action="productInfo" method="post">
                 <label for="brands">Choose a brand</label>
                 <select name="brandChoice">
+
                     {% for brand in brands: %}
                     <option value="{{brand}}">{{brand}}</option>
                     {% endfor %}
+                    
                 </select>
                 <input type="submit" value="Submit">
             </form>

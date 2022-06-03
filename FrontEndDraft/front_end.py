@@ -9,7 +9,7 @@ from datasource import *
 
 app = Flask(__name__)
 
-#data = []
+data = []
 databaseQuery = DataSource() #initializes new object of datasource
 brand = '' 
 product = ''
@@ -52,7 +52,8 @@ def get_all_products():
     allProducts = databaseQuery.getAllProducts()
     return allProducts
 
-@app.route('/multiProducts', methods=['POST'])
+
+@app.route('/multiProducts', methods=['GET', 'POST'])
 def display_brands_from_identical_products():
     '''
     PARAMETER: product: product name that method is looking for identical copies for 
@@ -61,7 +62,13 @@ def display_brands_from_identical_products():
     the necessary variables to the template so that it can generate dynamic
     drop down
     '''
-    product = request.form['product']
+    if request.method == 'POST':
+        product = request.form['product']
+    elif request.method == 'GET':
+        product = request.args['product']
+    else:
+        return "Not a valid request protocol"
+    # product = request.form['product']
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(request.form[product])
     return render_template('multiProducts.html', products='foo', brands=allBrandsFromIdenticalProducts)
 
