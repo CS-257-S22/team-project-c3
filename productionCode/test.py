@@ -19,21 +19,6 @@ class TestProductData(unittest.TestCase):
         ifNested = any(isinstance(row, list) for row in result)
         self.assertTrue(ifNested)
 
-    def test_load_csv_file_firstRow(self):
-        """Testing the function loadCSVFile with the first row of CSV file information 
-        Written by Alice"""
-        productData = self.defaultSampleData.load_csv_file()
-        firstRow = productData[1]
-        testData = ["MOCHI ICE CREAM BONBONS","G. T. Japan, Inc.","ICE CREAM INGREDIENTS: MILK, CREAM, SUGAR, STRAWBERRIES (STRAWBERRIES, SUGAR), CORN SYRUP SOLIDS, SKIM MILK, WHEY, NATURAL FLAVOR, GUAR GUM, MONO & DIGLYCERIDES, BEET JUICE AND BEET POWDER (FOR COLOR), CELLULOSE GUM, LOCUST BEAN GUM, CARRAGEENAN. COATING INGREDIENTS: SUGAR, WATER, RICE FLOUR, TREHALOSE, EGG WHITES, BEET JUICE AND BEET POWDER (FOR COLOR), DUSTED WITH CORN & POTATO STARCH"]
-        self.assertEqual(testData, firstRow)
-
-    def test_load_csv_file_lastRow(self): 
-        """Testing the function loadCSVFile with the last row of CSV file information 
-        Written by Alice"""
-        productData = self.defaultSampleData.load_csv_file()
-        lastRow = productData[len(productData)-1]
-        testData = ["FRESH & EASY, PASTA SAUCE WITH IMPORTED ITALIAN TOMATOES & OLIVE OIL","FRESH & EASY","PLUM TOMATOES, TOMATO PASTE, OLIVE OIL, BLACK OLIVES (BLACK OLIVES, WATER, SALT, FERROUS GLUCONATE), CAPERS (CAPERS, DISTILLED VINEGAR, SALT, WATER), KALAMATA OLIVES (KALAMATA OLIVES, WATER, SALT, RED WINE VINEGAR, EXTRA VIRGIN OLIVE OIL), GARLIC, ANCHOVY PASTE (ANCHOVIES, SALT, OLIVE OIL, ACETIC ACID), PARSLEY, BASIL, ONIONS, WHITE PEPPER, CRUSHED RED PEPPERS, OREGANO."]
-        self.assertEqual(testData,lastRow)
     
     def test_returnBrands(self):
         """Testing the helper function returnBrands. The test function uses a small 
