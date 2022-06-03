@@ -23,14 +23,14 @@ def homepage():
     '''
     return render_template('home.html', rows=get_all_products())
 
-def get_ingredients_from_database(theProduct):
+def get_ingredients_from_database(theProduct, theBrand):
     '''
     PARAMETER: theProduct: Producut that the query is searching for
     RETURN: return the results of the query getIngredients
     PURPOSE: Helper function to retrieve ingredients from database
     '''
     
-    theIngredients = databaseQuery.getIngredients(theProduct)
+    theIngredients = databaseQuery.getIngredients(theProduct, theBrand)
     return theIngredients
 
 def get_products_from_database(brand):
@@ -64,24 +64,31 @@ def display_brands_from_identical_products():
     '''
     if request.method == 'POST':
         product = request.form['product']
+        print(product)
     elif request.method == 'GET':
         product = request.args['product']
     else:
         return "Not a valid request protocol"
     # product = request.form['product']
-    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(request.form[product])
+    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(product)
+    print("Passed dataQuery sucessfully")
     return render_template('multiProducts.html', products='foo', brands=allBrandsFromIdenticalProducts)
 
-@app.route('/productInfo', methods=['POST'])
+@app.route('/productInfo', methods=['GET', 'POST'])
 def display_product_info_list():
     '''
     PARAMETER: N/A
     RETURN: renders template for individual product page
     PURPOSE:renders the product info page given the product information'
     '''
-    brand = request.form['brand']
-    product = request.form['product']
-    ingredients = get_ingredients_from_database(request.form['product', 'brand'])
+    if request.method == 'POST':
+        brand = request.form['brandChoice']
+        print(product)
+    elif request.method == 'GET':
+        brand = request.args['brandChoice']
+    else:
+        return "Not a valid request protocol"
+    ingredients = get_ingredients_from_database(product, brand)
     # brand = "FRESH & EASY"
     return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients)
 
