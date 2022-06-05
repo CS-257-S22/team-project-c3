@@ -21,6 +21,7 @@ def homepage():
     RETURN: template for homepage
     PURPOSE: renders template for the homepage
     '''
+    print("Entering homepage. Product = ", product)
     return render_template('home.html', rows=get_all_products())
 
 def get_ingredients_from_database(theProduct, theBrand):
@@ -29,7 +30,7 @@ def get_ingredients_from_database(theProduct, theBrand):
     RETURN: return the results of the query getIngredients
     PURPOSE: Helper function to retrieve ingredients from database
     '''
-    
+    print("Entering get_ingredients_from_database. Product= ", product)
     theIngredients = databaseQuery.getIngredients(theProduct, theBrand)
     return theIngredients
 
@@ -39,7 +40,7 @@ def get_products_from_database(brand):
     RETURN: Returns the product lists from the query getProducts
     PURPOSE: Helper function to retrieve the prodcuts of the given brand from the database
     '''
-
+    print("Entering get_products_from_database. Product= ", product)
     theProducts = databaseQuery.getProducts(brand)
     return theProducts
 
@@ -49,6 +50,7 @@ def get_all_products():
     RETURN: returns the results of the query getAllProducts
     PURPOSE:Helper funtion to retrieve all of the products in the database
     '''
+    print("Entering get_all_products. Product= ", product)
     allProducts = databaseQuery.getAllProducts()
     return allProducts
 
@@ -62,9 +64,10 @@ def display_brands_from_identical_products():
     the necessary variables to the template so that it can generate dynamic
     drop down
     '''
+    # print("Entering multiProducts. Products= ", product)
     if request.method == 'POST':
         product = request.form['product']
-        print(product)
+        # print(product)
     elif request.method == 'GET':
         product = request.args['product']
     else:
@@ -72,7 +75,8 @@ def display_brands_from_identical_products():
     # product = request.form['product']
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(product)
     print("Passed dataQuery sucessfully")
-    return render_template('multiProducts.html', products='foo', brands=allBrandsFromIdenticalProducts)
+    print("Printing product from multiProducts: ", product)
+    return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['GET', 'POST'])
 def display_product_info_list():
@@ -81,16 +85,18 @@ def display_product_info_list():
     RETURN: renders template for individual product page
     PURPOSE:renders the product info page given the product information'
     '''
+    print("Entering productInfo, Product= ", product)
+    print("Printing product inside of the productInfo function: ", product)
     if request.method == 'POST':
         brand = request.form['brandChoice']
-        print(product)
+        # print(product)
     elif request.method == 'GET':
         brand = request.args['brandChoice']
     else:
         return "Not a valid request protocol"
     ingredients = get_ingredients_from_database(product, brand)
     # brand = "FRESH & EASY"
-    return render_template('productInfo.html', product=get_products_from_database(brand), brand=brand, ingredients=ingredients)
+    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
 
 @app.route('/aboutPage')
 def display_about_page():
