@@ -135,9 +135,19 @@ ul {
     border-bottom: white;
 } */
 
+/* .ui-autocomplete-input {
+    border: none;
+    border-bottom: 3px solid white;
+} */
+
 .input {
     border: none;
     border-bottom: 2px solid white;
+}
+
+.select {
+    border: none;
+    border-bottom: 3px solid white;
 }
 
 .navbar {
@@ -174,10 +184,25 @@ ul {
     margin-left: 20px;
 }
 
+.input {
+    border: none;
+    border-bottom: 2px solid white;
+}
+
+/* .border-customized-input {
+    border: none;
+    border-bottom: 3px solid red;
+} */
+
 .boxes .container {
     display: flex;
     justify-content: space-between;
 }
+/* 
+.box {
+    margin: 25%;
+    padding: 15px 20px;
+} */
 
 .box .text {
     flex: 1;
