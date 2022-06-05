@@ -12,14 +12,14 @@ class TestDataSource(unittest.TestCase):
         pass
     
     def testStripOutJunk(self):
-        "Test to strip out the junk method"
+        '''Test to strip out the junk method'''
         tupleWithJunk = [('MIXED MELON SPEARS',), ('EGG WHITE OMELETTINI',), ('COCKTAIL ONIONS',), ('CHUNK WHITE ALBACORE TUNA IN WATER',), ('SEASONAL COOKIE PLATTER',), ('CRACKERS',), ('WHITE WINE VINEGAR',)]
         expectedResult = ['MIXED MELON SPEARS', 'EGG WHITE OMELETTINI', 'COCKTAIL ONIONS', 'CHUNK WHITE ALBACORE TUNA IN WATER', 'SEASONAL COOKIE PLATTER', 'CRACKERS', 'WHITE WINE VINEGAR']
         stripedResult = DataSource().stripOutJunk(tupleWithJunk)
         self.assertEqual(stripedResult, expectedResult)
 
     def testGetProductsFirstItemInResult(self):
-        "Method to test getProducts method"
+        '''Method to test getProducts method'''
         # strippedProducts = 
         with mock.patch('datasource.DataSource.stripProducts') as mockload:
             mockload.return_value = ['GUMMI SANTAS', 'SPICE DROPS', 'JELLY WREATHS', 'JELLY SANTAS & TREES', 'CRUSHED PEPPERMINT TWISTS', 'CHERRY SLICES', 'HOLIDAY GUMMIES', 'HOLIDAY GEMS', 'SMARTIES', 'GUMMY BEARS', 'PSYCHEDELIC JAWBREAKERS']
@@ -40,18 +40,25 @@ class TestDataSource(unittest.TestCase):
         self.assertEqual(expectedResult, lastResult)
     
     def testGetIngredients(self):
-        "Test to determine whether getIngredients works"
+        '''Test to determine whether getIngredients works'''
         theReturnedIngredients = DataSource().getIngredients('PIGS LIPS', "BIG JOHN'S")
         expectedResult = [('COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.',)]
-        print(theReturnedIngredients) 
+        # print(theReturnedIngredients) 
         self.assertEqual(expectedResult, theReturnedIngredients)
 
     def testAllBrandsFromIdenticalProducts(self):
-        "Test to determine if getAllBrandsFromIdenticalProducts works"
+        '''Test to determine if getAllBrandsFromIdenticalProducts works'''
         theReturnedBrands = DataSource().getAllBrandsFromIdenticalProducts('CEREAL BARS')
         expectedResult = [('The Kellogg Company'), ('The Kellogg Company'), ('Target Stores'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('Harris-Teeter Inc.'), ('Ahold Usa, Inc.'), ('Harris-Teeter Inc.'), ('Harris-Teeter Inc.')]
-        print("Printing the returned brands: ", theReturnedBrands)
+        # print("Printing the returned brands: ", theReturnedBrands)
         self.assertEqual(expectedResult, theReturnedBrands)
+
+    def testGetProductByIDNumber(self):
+        '''Tests if a prodcut can be retrieved based on its ID number'''
+        theReturnedProduct = DataSource().getProductByIdNumber("45327794")
+        expectedResult = [('Pringles Crisps Bbq 7.1oz',)]
+        # print("Printing the retuned product based on ID number: ", theReturnedProduct)
+        self.assertEqual(expectedResult, theReturnedProduct)
 
 if __name__== '__main__':
     unittest.main()

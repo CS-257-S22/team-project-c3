@@ -73,7 +73,7 @@ class DataSource:
         PURPOSE:  Gather the products associated with the given brandName  
         '''
         brandProducts = self.queryRequest("SELECT productName FROM products WHERE brandName=%s", brand, None)
-        print("Printing brand products: ", brandProducts)
+        # print("Printing brand products: ", brandProducts)
         return self.stripOutJunk(brandProducts)
 
     def getAllProducts(self):
@@ -92,9 +92,9 @@ class DataSource:
         RETURN: all brands that have a product that matches theProduct
         PURPOSE: Query to find all brand names that have the same product name as a given product
         '''
-        print("Now in datasource and about to attempt query for getAllBrandsFromIdenticalProducts.")
+        # print("Now in datasource and about to attempt query for getAllBrandsFromIdenticalProducts.")
         allBrandsFromIdenticalProducts = self.queryRequest("SELECT brandName FROM products WHERE productName=%s", theProduct, None)
-        print(allBrandsFromIdenticalProducts)
+        # print(allBrandsFromIdenticalProducts)
         return self.stripOutJunk(allBrandsFromIdenticalProducts)
     
     def getIngredients(self, theProduct, theBrand):
@@ -104,9 +104,9 @@ class DataSource:
         RETURN:     ingredients that query retrieved
         PURPOSE:    Gathers a list of ingredients from the given product
         '''
-        print("The product: ", theProduct, " The brand: ", theBrand)
+        # print("The product: ", theProduct, " The brand: ", theBrand)
         allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE productName=%s AND brandName=%s", theProduct, theBrand)
-        print("Printing all ingredients: ", allIngredients)
+        # print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
     def getIngredientsByIdNumber(self, productIdNumber):
@@ -116,7 +116,7 @@ class DataSource:
         PURPOSE: Gathers the ingredients by looking for it’s ID number 
         '''
         allIngredients = self.queryRequest("SELECT ingredients FROM products WHERE idNumber=%s", productIdNumber, None)
-        print("Printing all ingredients: ", allIngredients)
+        # print("Printing all ingredients: ", allIngredients)
         return allIngredients
 
     def getProductByIdNumber(self, productIdNumber):
@@ -136,7 +136,7 @@ class DataSource:
         PURPOSE: runs a query to find brand through a product's id number 
         '''
         brand = self.queryRequest("SELECT brandName FROM products WHERE idNumber=%s", idNumber, None)
-        print(f"Printing the brand associated with {idNumber}: {brand}")
+        # print(f"Printing the brand associated with {idNumber}: {brand}")
 
         return brand 
 

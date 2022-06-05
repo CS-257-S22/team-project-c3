@@ -24,7 +24,7 @@ def homepage():
     RETURN: template for homepage
     PURPOSE: renders template for the homepage
     '''
-    print("Entering homepage. Product = ", product)
+    # print("Entering homepage. Product = ", product)
     return render_template('home.html', rows=get_all_products())
 
 def get_ingredients_from_database(theProduct, theBrand):
@@ -33,7 +33,7 @@ def get_ingredients_from_database(theProduct, theBrand):
     RETURN: return the results of the query getIngredients
     PURPOSE: Helper function to retrieve ingredients from database
     '''
-    print("Entering get_ingredients_from_database. Product= ", product)
+    # print("Entering get_ingredients_from_database. Product= ", product)
     theIngredients = databaseQuery.getIngredients(theProduct, theBrand)
     return theIngredients
 
@@ -43,7 +43,7 @@ def get_products_from_database(brand):
     RETURN: Returns the product lists from the query getProducts
     PURPOSE: Helper function to retrieve the prodcuts of the given brand from the database
     '''
-    print("Entering get_products_from_database. Product= ", product)
+    # print("Entering get_products_from_database. Product= ", product)
     theProducts = databaseQuery.getProducts(brand)
     return theProducts
 
@@ -78,8 +78,8 @@ def display_brands_from_identical_products():
         return "Not a valid request protocol"
     # product = request.form['product']
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(myProduct)
-    print("Passed dataQuery sucessfully")
-    print("Printing product from multiProducts: ", product)
+    # print("Passed dataQuery sucessfully")
+    # print("Printing product from multiProducts: ", product)
     product = myProduct
     return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
 
@@ -90,8 +90,8 @@ def display_product_info_list():
     RETURN: renders template for individual product page
     PURPOSE:renders the product info page given the product information'
     '''
-    print("Entering productInfo, Product= ", product)
-    print("Printing product inside of the productInfo function: ", product)
+    # print("Entering productInfo, Product= ", product)
+    # print("Printing product inside of the productInfo function: ", product)
     if request.method == 'POST':
         brand = request.form['brandChoice']
         # print(product)
