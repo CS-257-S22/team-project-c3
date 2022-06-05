@@ -12,7 +12,10 @@ app = Flask(__name__)
 data = []
 databaseQuery = DataSource() #initializes new object of datasource
 brand = '' 
+
+global product 
 product = ''
+
 
 @app.route('/')
 def homepage():
@@ -50,7 +53,7 @@ def get_all_products():
     RETURN: returns the results of the query getAllProducts
     PURPOSE:Helper funtion to retrieve all of the products in the database
     '''
-    print("Entering get_all_products. Product= ", product)
+    #print("Entering get_all_products. Product= ", product)
     allProducts = databaseQuery.getAllProducts()
     return allProducts
 
@@ -64,18 +67,20 @@ def display_brands_from_identical_products():
     the necessary variables to the template so that it can generate dynamic
     drop down
     '''
-    # print("Entering multiProducts. Products= ", product)
+    global product
     if request.method == 'POST':
-        product = request.form['product']
-        # print(product)
+        myProduct = request.form['product']
+        
     elif request.method == 'GET':
-        product = request.args['product']
+        myProduct = request.args['product']
+       
     else:
         return "Not a valid request protocol"
     # product = request.form['product']
-    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(product)
+    allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(myProduct)
     print("Passed dataQuery sucessfully")
     print("Printing product from multiProducts: ", product)
+    product = myProduct
     return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['GET', 'POST'])
