@@ -40,10 +40,18 @@ class TestDataSource(unittest.TestCase):
         self.assertEqual(expectedResult, lastResult)
     
     def testGetIngredients(self):
-        "Test to determine whether getIngredients workds"
-        theReturnedIngredients = DataSource().getIngredients('PIGS LIPS')
-        expectedResult = [('COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.',)] 
+        "Test to determine whether getIngredients works"
+        theReturnedIngredients = DataSource().getIngredients('PIGS LIPS', "BIG JOHN'S")
+        expectedResult = [('COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.',)]
+        print(theReturnedIngredients) 
         self.assertEqual(expectedResult, theReturnedIngredients)
+
+    def testAllBrandsFromIdenticalProducts(self):
+        "Test to determine if getAllBrandsFromIdenticalProducts works"
+        theReturnedBrands = DataSource().getAllBrandsFromIdenticalProducts('CEREAL BARS')
+        expectedResult = [('The Kellogg Company'), ('The Kellogg Company'), ('Target Stores'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('The Kellogg Company'), ('Harris-Teeter Inc.'), ('Ahold Usa, Inc.'), ('Harris-Teeter Inc.'), ('Harris-Teeter Inc.')]
+        print("Printing the returned brands: ", theReturnedBrands)
+        self.assertEqual(expectedResult, theReturnedBrands)
 
 if __name__== '__main__':
     unittest.main()
