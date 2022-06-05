@@ -79,6 +79,7 @@ def display_brands_from_identical_products():
     # product = request.form['product']
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(myProduct)
     if (None == allBrandsFromIdenticalProducts):
+        print("arguments = none")
         print('passed the if statement')
         search = request.args['product']
 
