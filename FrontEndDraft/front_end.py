@@ -12,7 +12,7 @@ app = Flask(__name__)
 data = []
 databaseQuery = DataSource() #initializes new object of datasource
 brand = '' 
-product = ''
+product = 'foo'
 
 @app.route('/')
 def homepage():
