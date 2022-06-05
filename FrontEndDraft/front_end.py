@@ -78,10 +78,34 @@ def display_brands_from_identical_products():
         return "Not a valid request protocol"
     # product = request.form['product']
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(myProduct)
-    print("Passed dataQuery sucessfully")
-    print("Printing product from multiProducts: ", product)
-    product = myProduct
-    return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
+    if (None == allBrandsFromIdenticalProducts):
+        print('passed the if statement')
+        search = request.args['product']
+
+        allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
+        print(allBrandsFromSearch)
+        allBrandsFromSearch = allBrandsFromSearch.upper()
+        print(allBrandsFromSearch)
+
+        return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts)
+    else: 
+        print("Passed dataQuery sucessfully")
+        print("Printing product from multiProducts: ", product)
+        product = myProduct
+        return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
+
+@app.route('/multiProducts', methods=['GET', 'POST'])
+def display_Search_Results():
+    print("callingDisplaySearchResults")
+    if request.method =='POST': #hehe i don't know what this does 
+        search = request.form['product']
+    elif request.method =='GET': 
+        search = request.form['product']
+    else: 
+        return "not a valid request protocol"
+    allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
+
+    return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['GET', 'POST'])
 def display_product_info_list():
@@ -94,13 +118,12 @@ def display_product_info_list():
     print("Printing product inside of the productInfo function: ", product)
     if request.method == 'POST':
         brand = request.form['brandChoice']
-        # print(product)
+       
     elif request.method == 'GET':
         brand = request.args['brandChoice']
     else:
         return "Not a valid request protocol"
     ingredients = get_ingredients_from_database(product, brand)
-    # brand = "FRESH & EASY"
     return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
 
 @app.route('/aboutPage')
