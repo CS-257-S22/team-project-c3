@@ -55,8 +55,8 @@ class TestDataSource(unittest.TestCase):
 
     def testGetProductByIDNumber(self):
         '''Tests if a prodcut can be retrieved based on its ID number'''
-        theReturnedProduct = DataSource().getProductByIdNumber("45327794")
-        expectedResult = [('Pringles Crisps Bbq 7.1oz',)]
+        theReturnedProduct = DataSource().getProductByIdNumber("45288988")
+        expectedResult = [('HOT and SWEET SLICED GREEN JALAPENOS',)]
         # print("Printing the retuned product based on ID number: ", theReturnedProduct)
         self.assertEqual(expectedResult, theReturnedProduct)
 
