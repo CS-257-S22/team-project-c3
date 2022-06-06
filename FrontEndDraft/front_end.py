@@ -29,9 +29,9 @@ def homepage():
 
 def get_ingredients_from_database(theProduct, theBrand):
     '''
-    PARAMETER: theProduct: Producut that the query is searching for
-    RETURN: return the results of the query getIngredients
-    PURPOSE: Helper function to retrieve ingredients from database
+    PARAMETER: theProduct: Product string that the query is searching for
+    RETURN: return the results of the query getIngredients as a list 
+    PURPOSE: Helper function to retrieve ingredients from database and return them as a list 
     '''
     # print("Entering get_ingredients_from_database. Product= ", product)
     theIngredients = databaseQuery.getIngredients(theProduct, theBrand)
@@ -39,7 +39,7 @@ def get_ingredients_from_database(theProduct, theBrand):
 
 def get_products_from_database(brand):
     '''
-    PARAMETER: N/A
+    PARAMETER: brand string  that query is looking for products that belong to it. 
     RETURN: Returns the product lists from the query getProducts
     PURPOSE: Helper function to retrieve the prodcuts of the given brand from the database
     '''
@@ -50,7 +50,7 @@ def get_products_from_database(brand):
 def get_all_products():
     '''
     PARAMETER: N/A
-    RETURN: returns the results of the query getAllProducts
+    RETURN: returns the list of products from the database query getAllProducts
     PURPOSE:Helper funtion to retrieve all of the products in the database
     '''
     #print("Entering get_all_products. Product= ", product)
@@ -61,9 +61,9 @@ def get_all_products():
 @app.route('/multiProducts', methods=['GET', 'POST'])
 def display_brands_from_identical_products():
     '''
-    PARAMETER: product: product name that method is looking for identical copies for 
+    PARAMETER: product: product name (as string) that method is looking for identical copies for 
     RETURN: result of query getAllBrandsFromIdenticalProducts (a list of brands where each brand has an item that is same as brand)
-    PURPOSE:App route to the multiProducts webpage. This method is intended to pass
+    PURPOSE: App route to the multiProducts webpage. This method is intended to pass
     the necessary variables to the template so that it can generate dynamic
     drop down
     '''
@@ -95,18 +95,6 @@ def display_brands_from_identical_products():
         product = myProduct
         return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
 
-@app.route('/multiProducts', methods=['GET', 'POST'])
-def display_Search_Results():
-    print("callingDisplaySearchResults")
-    if request.method =='POST': #hehe i don't know what this does 
-        search = request.form['product']
-    elif request.method =='GET': 
-        search = request.form['product']
-    else: 
-        return "not a valid request protocol"
-    allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
-
-    return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['GET', 'POST'])
 def display_product_info_list():
