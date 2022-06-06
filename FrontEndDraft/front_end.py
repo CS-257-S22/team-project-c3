@@ -156,6 +156,15 @@ def internal_server_error(e):
     return "Hmmmm, that didn't seem to work. Use /5111 to return to the homepage and /5111/Products/brandName<br>" \
         "to query the products for the requested brand."
 
+@app.errorhandler(200)
+def bad_request_error(e):
+    '''
+    PARAMETER: N/A
+    RETURNS: error message
+    PURPOSE: to handle bad requests
+    '''
+    return render_template('200.html', rows=get_all_products()) #need rows so that autofill bar is still available
+
 app.run(host='0.0.0.0', port=5111)
 
     
