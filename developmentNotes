@@ -21,3 +21,12 @@ datasource getIngredients.
 Ensure footer is the same on all pages
 
 Edge case: if user hits enter and submits a string that is not a product in the dataset
+
+Remove the ASCII character values from data entries (those on the inside)
+
+Make thedatabse update correctly
+
+CSS isn't doing what I want it to.
+
+How should we deal with case in the search bar. Could we make everything in the database capital and then convert the user's input into 
+all caps?
