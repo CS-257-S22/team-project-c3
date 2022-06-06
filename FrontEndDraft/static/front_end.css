@@ -70,6 +70,7 @@ h1, h2 {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 30px;
+	flex-shrink: 3;
 }
 
 .header {
@@ -112,7 +113,8 @@ ul {
 input#tags {
     border: none;
     border-bottom: 2px solid white;
-    background-color: red;
+	margin: 2px;
+	padding-left: 10px;
 }
 
 select {
@@ -145,6 +147,11 @@ select {
     /* min-width: 1000px; */
 }
 
+.navbar form input {
+	border-radius: 20px;
+	font-family: cabin;
+}
+
 .navbar ul {
     display: flex;
     padding-left: 5px;
@@ -175,8 +182,33 @@ select {
 }
 
 .brandbox {
-    margin-left: 20%;
-    margin-right: 20%;
+	margin-top: 25px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.brandbox p {
+	margin-bottom: 10px;
+	font-size: 30px;
+}
+
+.brandbox form {
+	font-size: 30px;
+	
+}
+
+.brandbox select {
+	padding: 5px;
+	margin-left: 10px;
+	border-radius: 20px;
+	font-family: cabin;
+}
+
+.brandbox input {
+	border-radius: 20px;
+	font-family: cabin;
 }
 
 .footer {
@@ -193,34 +225,3 @@ h2 {
     color: white;
     font-size: 2rem;
 }
-
-
-/* input[type="text"] {
-    border: none;
-    border-bottom: 2px solid white;
-} */
-
-/* input[type="text" i] {
-    border: none;
-    border-bottom: 2px solid white;
-} */
-
-/* input[class="ui-autocomplete-input"] {
-    border: none;
-    border-bottom: 2px solid white;
-} */
-
-/* .input["tags.ui-autocomplete-input"] {
-    border: none;
-    border-bottom: 3px solid white;
-} */
-
-/* .form .input[type="text"] {
-    border: none;
-    border-bottom: white;
-} */
-
-/* .ui-autocomplete-input {
-    border: none;
-    border-bottom: 3px solid white;
-} */
