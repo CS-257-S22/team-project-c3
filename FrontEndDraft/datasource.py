@@ -137,8 +137,8 @@ class DataSource:
         '''
         brand = self.queryRequest("SELECT brandName FROM products WHERE idNumber=%s", idNumber, None)
         # print(f"Printing the brand associated with {idNumber}: {brand}")
-
         return brand 
+
     def getSearchBarMatches(self, search):
         matches = self.queryRequest("SELECT * FROM products WHERE product CONTAINS %s",search, None)
         print(f"Printing the matches associated with {search}")
