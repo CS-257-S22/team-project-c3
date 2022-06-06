@@ -103,8 +103,7 @@ def display_product_info_list():
     RETURN: renders template for individual product page
     PURPOSE:renders the product info page given the product information'
     '''
-    # print("Entering productInfo, Product= ", product)
-    # print("Printing product inside of the productInfo function: ", product)
+    
     if request.method == 'POST':
         brand = request.form['brandChoice']
        
