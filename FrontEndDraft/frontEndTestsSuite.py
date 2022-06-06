@@ -41,7 +41,7 @@ class TestDataSource(unittest.TestCase):
     
     def testGetIngredients(self):
         '''Test to determine whether getIngredients works'''
-        theReturnedIngredients = DataSource().getIngredients('PIGS LIPS', "BIG JOHN'S")
+        theReturnedIngredients = DataSource().getIngredients('PIGS LIPS', 'BIG JOHNS')
         expectedResult = [('COOKED CURED PIGS LIPS, WATER, SALT, SODIUM ERYTHORBATE, SODIUM NITRITE.',)]
         # print(theReturnedIngredients) 
         self.assertEqual(expectedResult, theReturnedIngredients)
@@ -56,7 +56,7 @@ class TestDataSource(unittest.TestCase):
     def testGetProductByIDNumber(self):
         '''Tests if a prodcut can be retrieved based on its ID number'''
         theReturnedProduct = DataSource().getProductByIdNumber("45288988")
-        expectedResult = [('HOT and SWEET SLICED GREEN JALAPENOS',)]
+        expectedResult = [('HOT AND SWEET SLICED GREEN JALAPENOS',)]
         # print("Printing the retuned product based on ID number: ", theReturnedProduct)
         self.assertEqual(expectedResult, theReturnedProduct)
 

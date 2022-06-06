@@ -85,13 +85,24 @@ def display_brands_from_identical_products():
         allBrandsFromSearch = allBrandsFromSearch.upper()
         # print(allBrandsFromSearch)
 
-        return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts)
+        return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts, rows=get_all_products())
     else: 
         # print("Passed dataQuery sucessfully")
         # print("Printing product from multiProducts: ", product)
         product = myProduct
-        return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
+        return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts, rows=get_all_products())
 
+# @app.route('/multiProducts', methods=['GET', 'POST'])
+# def display_Search_Results():
+#     if request.method =='POST':  
+#         product = request.form['product']
+#     elif request.method =='GET': 
+#         product = request.form['product']
+#     else: 
+#         return "not a valid request protocol"
+#     allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
+
+#     return render_template('multiProducts.html', products = product, brands= allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['GET', 'POST'])
 def display_product_info_list():
@@ -108,7 +119,7 @@ def display_product_info_list():
     else:
         return "Not a valid request protocol"
     ingredients = get_ingredients_from_database(product, brand)
-    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
+    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients, rows=get_all_products())
 
 @app.route('/aboutPage')
 def display_about_page():
@@ -146,6 +157,7 @@ def bad_request_error(e):
     RETURNS: error message
     PURPOSE: to handle bad requests
     '''
+    print(e)
     return render_template('400.html', rows=get_all_products())
 
 app.run(host='0.0.0.0', port=5111)
