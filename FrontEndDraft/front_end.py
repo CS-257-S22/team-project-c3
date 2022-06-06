@@ -10,7 +10,7 @@ from datasource import *
 app = Flask(__name__)
 
 data = []
-databaseQuery = DataSource() #initializes new object of datasource
+databaseQuery = DataSource()
 brand = '' 
 
 global product 
@@ -24,7 +24,6 @@ def homepage():
     RETURN: template for homepage
     PURPOSE: renders template for the homepage
     '''
-    # print("Entering homepage. Product = ", product)
     return render_template('home.html', rows=get_all_products())
 
 def get_ingredients_from_database(theProduct, theBrand):
@@ -33,7 +32,6 @@ def get_ingredients_from_database(theProduct, theBrand):
     RETURN: return the results of the query getIngredients as a list 
     PURPOSE: Helper function to retrieve ingredients from database and return them as a list 
     '''
-    # print("Entering get_ingredients_from_database. Product= ", product)
     theIngredients = databaseQuery.getIngredients(theProduct, theBrand)
     return theIngredients
 
@@ -43,7 +41,6 @@ def get_products_from_database(brand):
     RETURN: Returns the product lists from the query getProducts
     PURPOSE: Helper function to retrieve the prodcuts of the given brand from the database
     '''
-    # print("Entering get_products_from_database. Product= ", product)
     theProducts = databaseQuery.getProducts(brand)
     return theProducts
 
@@ -53,7 +50,6 @@ def get_all_products():
     RETURN: returns the list of products from the database query getAllProducts
     PURPOSE:Helper funtion to retrieve all of the products in the database
     '''
-    #print("Entering get_all_products. Product= ", product)
     allProducts = databaseQuery.getAllProducts()
     return allProducts
 
@@ -76,25 +72,37 @@ def display_brands_from_identical_products():
        
     else:
         return "Not a valid request protocol"
-    # product = request.form['product']
+
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(myProduct)
+    
     if (None == allBrandsFromIdenticalProducts):
-        print("arguments = none")
-        print('passed the if statement')
+        # print("arguments = none")
+        # print('passed the if statement')
         search = request.args['product']
 
         allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
-        print(allBrandsFromSearch)
+        # print(allBrandsFromSearch)
         allBrandsFromSearch = allBrandsFromSearch.upper()
-        print(allBrandsFromSearch)
+        # print(allBrandsFromSearch)
 
-        return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts)
+        return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts, rows=get_all_products())
     else: 
-        print("Passed dataQuery sucessfully")
-        print("Printing product from multiProducts: ", product)
+        # print("Passed dataQuery sucessfully")
+        # print("Printing product from multiProducts: ", product)
         product = myProduct
-        return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts)
+        return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts, rows=get_all_products())
 
+# @app.route('/multiProducts', methods=['GET', 'POST'])
+# def display_Search_Results():
+#     if request.method =='POST':  
+#         product = request.form['product']
+#     elif request.method =='GET': 
+#         product = request.form['product']
+#     else: 
+#         return "not a valid request protocol"
+#     allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
+
+#     return render_template('multiProducts.html', products = product, brands= allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['GET', 'POST'])
 def display_product_info_list():
@@ -103,7 +111,10 @@ def display_product_info_list():
     RETURN: renders template for individual product page
     PURPOSE:renders the product info page given the product information'
     '''
+<<<<<<< HEAD
     
+=======
+>>>>>>> 14f44dd9deeb65913e0eefd79bd8b47b09b713f6
     if request.method == 'POST':
         brand = request.form['brandChoice']
        
@@ -112,7 +123,7 @@ def display_product_info_list():
     else:
         return "Not a valid request protocol"
     ingredients = get_ingredients_from_database(product, brand)
-    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients)
+    return render_template('productInfo.html', product=product, brand=brand, ingredients=ingredients, rows=get_all_products())
 
 @app.route('/aboutPage')
 def display_about_page():
@@ -130,7 +141,7 @@ def page_not_found(e):
     RETURN: template for 404 page
     PURPOSE: Renders template for our 404.html page
     '''
-    return render_template('404.html', rows=get_all_products()) #need rows so that autofill bar is still available
+    return render_template('404.html', rows=get_all_products())
 
 @app.errorhandler(500)
 def internal_server_error(e): 
@@ -143,14 +154,15 @@ def internal_server_error(e):
     return "Hmmmm, that didn't seem to work. Use /5111 to return to the homepage and /5111/Products/brandName<br>" \
         "to query the products for the requested brand."
 
-@app.errorhandler(200)
+@app.errorhandler(400)
 def bad_request_error(e):
     '''
     PARAMETER: N/A
     RETURNS: error message
     PURPOSE: to handle bad requests
     '''
-    return render_template('200.html', rows=get_all_products()) #need rows so that autofill bar is still available
+    print(e)
+    return render_template('400.html', rows=get_all_products())
 
 app.run(host='0.0.0.0', port=5111)
 

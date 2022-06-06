@@ -43,9 +43,9 @@
                     <a href="https://fdc.nal.usda.gov/download-datasets.html" target="_blank">USDA Data Source</a>
                     </li>
                 </ul>
-                <form action="multiProducts" method="post" target="">
+                <form action="multiProducts" method="post">
                     <label for="product">Search for a product:</label> 
-                    <input type="text" id="tags">
+                    <input type="text" id="tags" name="product" class="ui-autocomplete-input">
                     <script>
                         $( function() {
                             var availableTags = [
