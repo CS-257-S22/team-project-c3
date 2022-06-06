@@ -93,7 +93,7 @@ class DataSource:
         PURPOSE: Query to find all brand names that have the same product name as a given product
         '''
         # print("Now in datasource and about to attempt query for getAllBrandsFromIdenticalProducts.")
-        allBrandsFromIdenticalProducts = self.queryRequest("SELECT brandName FROM products WHERE productName=%s", theProduct, None)
+        allBrandsFromIdenticalProducts = self.queryRequest("SELECT brandName FROM products WHERE productName=%s", theProduct.upper(), None)
         # print(allBrandsFromIdenticalProducts)
         return self.stripOutJunk(allBrandsFromIdenticalProducts)
     
@@ -139,11 +139,7 @@ class DataSource:
         # print(f"Printing the brand associated with {idNumber}: {brand}")
         return brand 
 
-    def getSearchBarMatches(self, search):
-        matches = self.queryRequest("SELECT * FROM products WHERE product CONTAINS %s",search, None)
-        print(f"Printing the matches associated with {search}")
-        return matches
-
+    
 if __name__ == '__main__':
     my_source = DataSource()
     my_source.connect()
