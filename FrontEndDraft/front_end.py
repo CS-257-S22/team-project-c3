@@ -76,33 +76,15 @@ def display_brands_from_identical_products():
     allBrandsFromIdenticalProducts = databaseQuery.getAllBrandsFromIdenticalProducts(myProduct)
     
     if (None == allBrandsFromIdenticalProducts):
-        # print("arguments = none")
-        # print('passed the if statement')
         search = request.args['product']
 
         allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
-        # print(allBrandsFromSearch)
         allBrandsFromSearch = allBrandsFromSearch.upper()
-        # print(allBrandsFromSearch)
 
         return render_template('multiProducts.html', products = search, brands= allBrandsFromIdenticalProducts, rows=get_all_products())
     else: 
-        # print("Passed dataQuery sucessfully")
-        # print("Printing product from multiProducts: ", product)
         product = myProduct
         return render_template('multiProducts.html', products=product, brands=allBrandsFromIdenticalProducts, rows=get_all_products())
-
-# @app.route('/multiProducts', methods=['GET', 'POST'])
-# def display_Search_Results():
-#     if request.method =='POST':  
-#         product = request.form['product']
-#     elif request.method =='GET': 
-#         product = request.form['product']
-#     else: 
-#         return "not a valid request protocol"
-#     allBrandsFromSearch = databaseQuery.getSearchBarMatches(search)
-
-#     return render_template('multiProducts.html', products = product, brands= allBrandsFromIdenticalProducts)
 
 @app.route('/productInfo', methods=['GET', 'POST'])
 def display_product_info_list():
@@ -111,10 +93,6 @@ def display_product_info_list():
     RETURN: renders template for individual product page
     PURPOSE:renders the product info page given the product information'
     '''
-<<<<<<< HEAD
-    
-=======
->>>>>>> 14f44dd9deeb65913e0eefd79bd8b47b09b713f6
     if request.method == 'POST':
         brand = request.form['brandChoice']
        
